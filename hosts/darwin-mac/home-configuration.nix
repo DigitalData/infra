@@ -4,25 +4,16 @@
   # Home-manager configuration for macOS
   # Integrated via nix-darwin
 
-  home.stateVersion = "25.11";
-
-  # Home packages
-  home.packages = with pkgs; [
-    git
-    neovim
-    # TODO: Add ghostty, vscode, and other tools
+  imports = [
+    ../../modules/users/digitaldata.nix
   ];
 
-  # Configure git
-  programs.git = {
-    enable = true;
-    userName = "xavtrav";
-    # userEmail = "your-email@example.com";
-  };
+  # Pass host-specific args to imported modules
+  _module.args.hostname = "darwin-mac";
+  _module.args.isLinux = false;
 
-  # Bash configuration
-  programs.bash.enable = true;
+  home.username = "digitaldata";
+  home.homeDirectory = "/Users/digitaldata";
 
-  # Services
-  services.ssh-agent.enable = true;
+  home.stateVersion = "25.11";
 }

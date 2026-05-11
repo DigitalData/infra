@@ -9,6 +9,8 @@
       ../../modules/common/nixpkgs.nix
       # Common nix daemon settings
       ../../modules/common/nix.nix
+      # Common user definitions
+      ../../modules/common/users.nix
     ];
 
   # Bootloader.
@@ -49,13 +51,7 @@
     variant = "";
   };
 
-  # Define a user account. Don't forget to set a password with 'passwd'.
-  users.users.xavtrav = {
-    isNormalUser = true;
-    description = "xavtrav";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
-  };
+
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
