@@ -7,3 +7,24 @@ result-*
 
 # Ignore NixOS interactive test driver history
 **/.nixos-test-history
+
+# Ignore unencrypted secrets (encrypted via agenix)
+**/secrets/*.age
+**/secrets/*.txt
+**/secrets/*.key
+!**/secrets/.gitkeep
+
+# Ignore editor and IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Ignore OS-specific files
+.env
+.env.local
+
+# Optional: Ignore flake.lock for development (uncomment if preferred)
+# flake.lock
