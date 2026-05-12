@@ -14,7 +14,7 @@ if [ ! -d "$HOST_FOLDER" ]; then
 fi
 
 echo "Running disko for host folder: $HOST_FOLDER"
-nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format "$HOST_FOLDER/disko.nix"
+nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy "$HOST_FOLDER/disko.nix"
 
 echo "Disk destroyed and formatted. Now mounting..."
-nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode mount "$HOST_FOLDER/disko.nix"
+nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode format,mount "$HOST_FOLDER/disko.nix"
