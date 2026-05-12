@@ -49,7 +49,7 @@
             content = {
               type = "filesystem";
               format = "btrfs";
-              mountpoint = "/mnt/data";
+              mountpoint = "/data";
             };
           };
         };

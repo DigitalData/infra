@@ -133,6 +133,7 @@ ls /dev/disk/by-id/
 # ata-ST2000DM001-1CH164_Z1E3253L
 # ata-Corsair_Neutron_GTX_SSD_130479140000971401BB
 ```
+Use this to update the `disko.nix` for the new host.
 
 ### Step 5: Partition and format disks with disko
 
@@ -140,7 +141,7 @@ Instead of manual partitioning, use disko for declarative disk management:
 
 ```bash
 # Run disko to partition and format
-sudo ./scripts/disko.sh /hosts/<hostname>
+sudo sh ./scripts/disko.sh /hosts/<hostname>
 ```
 
 > [!NOTE]
