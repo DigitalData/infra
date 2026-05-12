@@ -122,27 +122,31 @@ git clone git@github.com:YOUR-USERNAME/YOUR-REPO.git /mnt/nixos-config
 git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git /mnt/nixos-config
 ```
 
-### Step 4: Partition and format disks
+### Step 4: Identify your disks
 
 ```bash
-# Use parted or fdisk to partition your disk
-# Example for a simple single-partition setup:
-sudo parted /dev/sda -- mklabel gpt
-sudo parted /dev/sda -- mkpart primary 512MiB -8GiB
-sudo parted /dev/sda -- mkpart primary linux-swap -8GiB 100%
-sudo parted /dev/sda -- mkpart ESP fat32 1MiB 512MiB
-sudo parted /dev/sda -- set 3 esp on
+# List available disks by ID (persistent identifiers)
+ls /dev/disk/by-id/
 
-# Format partitions
-sudo mkfs.ext4 -L nixos /dev/sda1
-sudo mkswap -L swap /dev/sda2
-sudo mkfs.fat -F 32 -n boot /dev/sda3
+# Note the disk IDs you'll use in your disko config
+# Example output:
+# ata-ST2000DM001-1CH164_Z1E3253L
+# ata-Corsair_Neutron_GTX_SSD_130479140000971401BB
+```
 
-# Mount partitions
-sudo mount /dev/disk/by-label/nixos /mnt
-sudo mkdir -p /mnt/boot
-sudo mount /dev/disk/by-label/boot /mnt/boot
-sudo swapon /dev/disk/by-label/swap
+### Step 5: Partition and format disks with disko
+
+Instead of manual partitioning, use disko for declarative disk management:
+
+```bash
+# Copy your disko config to the installer
+sudo cp /mnt/nixos-config/hosts/my-nixos-host/disko.nix /tmp/
+
+# Edit the disko config to match your disk IDs
+sudo nvim /tmp/disko.nix
+
+# Run disko to partition and format
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount /tmp/disko.nix
 ```
 
 ### Step 5: Generate hardware config and install
