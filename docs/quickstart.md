@@ -78,6 +78,112 @@ Edit `hosts/my-host/home-configuration.nix`:
 
 ---
 
+## Part 1.5: Install NixOS Directly from Installer USB
+
+Skip the manual installation and go straight to your configured system:
+
+### Step 1: Boot into NixOS installer
+
+1. Download the latest NixOS ISO
+2. Create a bootable USB drive
+3. Boot from the USB drive
+4. Select "NixOS installer" from the GRUB menu
+
+### Step 2: Set up networking and git
+
+```bash
+# Connect to WiFi (if needed)
+sudo systemctl start wpa_supplicant
+wpa_cli
+> add_network
+> set_network 0 ssid "YOUR_WIFI_SSID"
+> set_network 0 psk "YOUR_WIFI_PASSWORD"
+> enable_network 0
+> quit
+
+# Test internet connection
+ping -c 3 google.com
+
+# Install git and generate SSH key
+sudo nix-env -iA nixos.git
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_github -C "installer@my-nixos-host"
+
+# Add the public key to GitHub (SSH Keys in settings)
+cat ~/.ssh/id_ed25519_github.pub
+```
+
+### Step 3: Clone your config repo
+
+```bash
+# Clone via SSH (recommended)
+git clone git@github.com:YOUR-USERNAME/YOUR-REPO.git /mnt/nixos-config
+
+# Or via HTTPS (less secure)
+git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git /mnt/nixos-config
+```
+
+### Step 4: Partition and format disks
+
+```bash
+# Use parted or fdisk to partition your disk
+# Example for a simple single-partition setup:
+sudo parted /dev/sda -- mklabel gpt
+sudo parted /dev/sda -- mkpart primary 512MiB -8GiB
+sudo parted /dev/sda -- mkpart primary linux-swap -8GiB 100%
+sudo parted /dev/sda -- mkpart ESP fat32 1MiB 512MiB
+sudo parted /dev/sda -- set 3 esp on
+
+# Format partitions
+sudo mkfs.ext4 -L nixos /dev/sda1
+sudo mkswap -L swap /dev/sda2
+sudo mkfs.fat -F 32 -n boot /dev/sda3
+
+# Mount partitions
+sudo mount /dev/disk/by-label/nixos /mnt
+sudo mkdir -p /mnt/boot
+sudo mount /dev/disk/by-label/boot /mnt/boot
+sudo swapon /dev/disk/by-label/swap
+```
+
+### Step 5: Generate hardware config and install
+
+```bash
+# Generate hardware configuration
+sudo nixos-generate-config --root /mnt
+
+# Copy your host config to the mounted system
+sudo cp -r /mnt/nixos-config/hosts/my-nixos-host/* /mnt/etc/nixos/
+
+# Install NixOS using your flake
+sudo nixos-install --flake /mnt/etc/nixos#my-nixos-host
+
+# Set root password when prompted
+sudo nixos-enter -c 'passwd'
+
+# Reboot into your new system
+sudo reboot
+```
+
+### Step 6: Post-install setup
+
+After reboot, your system should be running with your configuration. Complete the SSH setup:
+
+```bash
+# On your development machine, get your SSH public key
+cat ~/.ssh/id_ed25519.pub
+
+# On the new NixOS host, add it to the digitaldata user
+sudo -u digitaldata mkdir -p /home/digitaldata/.ssh
+sudo -u digitaldata chmod 700 /home/digitaldata/.ssh
+echo "YOUR_PUBLIC_KEY_HERE" | sudo -u digitaldata tee /home/digitaldata/.ssh/authorized_keys
+sudo -u digitaldata chmod 600 /home/digitaldata/.ssh/authorized_keys
+sudo chown -R digitaldata:users /home/digitaldata/.ssh
+```
+
+Now you can SSH in without a password!
+
+---
+
 ## Part 2: Set Up the New Host to Use This Config
 
 ### For NixOS (first-time install)
@@ -104,28 +210,64 @@ scp root@my-nixos-host:/tmp/hardware-configuration.nix hosts/my-nixos-host/
 
 Or manually copy the output into `hosts/my-nixos-host/hardware-configuration.nix`.
 
-#### Step 3: Clone the repo and set up SSH
+#### Step 3: Clone the repo with SSH
 
 On the new NixOS host:
 
 ```bash
-# Generate SSH key for git
-ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -C "my-nixos-host"
+# Generate SSH key for git (if you don't have one)
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_github -C "my-nixos-host"
 
-# Clone the config repo
-git clone <your-repo-url> /etc/nixos
-cd /etc/nixos/hosts/my-nixos-host
+# Add the public key to GitHub (SSH Keys in settings)
+cat ~/.ssh/id_ed25519_github.pub
 
-# (Optional) Add host SSH key to GitHub/GitLab for deployment
-cat ~/.ssh/id_ed25519.pub
-# Add this to your git service's deploy keys
+# Clone the config repo via SSH (no password needed for future pulls)
+git clone git@github.com:YOUR-USERNAME/YOUR-REPO.git /etc/nixos
+cd /etc/nixos
 ```
 
-#### Step 4: First flake rebuild
+This way, future `git pull` commands won't require authentication.
+
+#### Step 4: Set up SSH access from your development machine
+
+To SSH into your host without passwords, add your development machine's SSH key:
+
+**On your development machine:**
+```bash
+# Copy your public key (or generate a new host-specific key)
+cat ~/.ssh/id_ed25519.pub  # or id_rsa.pub
+
+# Or create a host-specific key for this server:
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_my-nixos-host -C "dev-machine-to-my-nixos-host"
+cat ~/.ssh/id_ed25519_my-nixos-host.pub
+```
+
+**On the NixOS host:**
+```bash
+# Create authorized_keys file if it doesn't exist
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+touch ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+
+# Add your development machine's public key to authorized_keys
+echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... dev-machine-to-my-nixos-host" >> ~/.ssh/authorized_keys
+
+# Or use ssh-copy-id from your dev machine:
+# ssh-copy-id -i ~/.ssh/id_ed25519_my-nixos-host.pub user@my-nixos-host
+```
+
+**Test SSH access:**
+```bash
+# From your development machine
+ssh user@my-nixos-host  # Should connect without password
+```
+
+#### Step 5: First flake rebuild
 
 ```bash
-cd /etc/nixos/hosts/my-nixos-host
-sudo nixos-rebuild switch --flake .
+cd /etc/nixos
+sudo nixos-rebuild switch --flake .#my-nixos-host
 ```
 
 If successful, your system now uses the flake configuration.
@@ -141,13 +283,58 @@ If successful, your system now uses the flake configuration.
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh
 ```
 
-#### Step 2: Clone the repo and set up SSH
+#### Step 2: Clone the repo with SSH
 
 ```bash
-# Generate SSH key for git
-ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -C "my-darwin-host"
+# Generate SSH key for git (if you don't have one)
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_github -C "my-darwin-host"
 
-# Clone the config repo
+# Add the public key to GitHub (SSH Keys in settings)
+cat ~/.ssh/id_ed25519_github.pub
+
+# Clone the config repo via SSH (no password needed for future pulls)
+git clone git@github.com:YOUR-USERNAME/YOUR-REPO.git ~/.config/nixpkgs
+cd ~/.config/nixpkgs
+```
+
+This way, future `git pull` commands won't require authentication.
+
+#### Step 3: Set up SSH access from your development machine
+
+To SSH into your macOS host without passwords, add your development machine's SSH key:
+
+**On your development machine:**
+```bash
+# Copy your public key (or generate a new host-specific key)
+cat ~/.ssh/id_ed25519.pub  # or id_rsa.pub
+
+# Or create a host-specific key for this mac:
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_my-darwin-host -C "dev-machine-to-my-darwin-host"
+cat ~/.ssh/id_ed25519_my-darwin-host.pub
+```
+
+**On the macOS host:**
+```bash
+# Create authorized_keys file if it doesn't exist
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+touch ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+
+# Add your development machine's public key to authorized_keys
+echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... dev-machine-to-my-darwin-host" >> ~/.ssh/authorized_keys
+
+# Or use ssh-copy-id from your dev machine:
+# ssh-copy-id -i ~/.ssh/id_ed25519_my-darwin-host.pub user@my-darwin-host
+```
+
+**Test SSH access:**
+```bash
+# From your development machine
+ssh user@my-darwin-host  # Should connect without password
+```
+
+#### Step 4: Build nix-darwin
 git clone <your-repo-url> ~/nixos-config
 cd ~/nixos-config/hosts/my-darwin-host
 
