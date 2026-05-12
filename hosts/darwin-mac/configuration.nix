@@ -4,10 +4,11 @@
   # nix-darwin system configuration for macOS
   # TODO: Customize for your Mac setup
 
-  system.stateVersion = 5; # Used for backwards compatibility, read docs before changing.
+  imports = [
+    ../../modules/common/users.nix
+  ];
 
-  # Enable home-manager
-  users.users."xavtrav".home = "/Users/xavtrav";
+  system.stateVersion = 5; # Used for backwards compatibility, read docs before changing.
 
   # System packages
   environment.systemPackages = with pkgs; [
