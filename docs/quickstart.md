@@ -139,15 +139,12 @@ ls /dev/disk/by-id/
 Instead of manual partitioning, use disko for declarative disk management:
 
 ```bash
-# Copy your disko config to the installer
-sudo cp /mnt/nixos-config/hosts/my-nixos-host/disko.nix /tmp/
-
-# Edit the disko config to match your disk IDs
-sudo nvim /tmp/disko.nix
-
 # Run disko to partition and format
-sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount /tmp/disko.nix
+sudo ./scripts/disko.sh /hosts/<hostname>
 ```
+
+> [!NOTE]
+> You may see "can't read superblock" messages during the destroy phase - this is normal and expected when wiping existing partitions. Disko will continue and complete successfully.
 
 ### Step 5: Generate hardware config and install
 
