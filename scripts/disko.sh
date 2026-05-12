@@ -12,4 +12,9 @@ if [ ! -d "$HOST_FOLDER" ]; then
   echo "Error: $HOST_FOLDER is not a directory"
   exit 1
 fi
-nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount "$HOST_FOLDER/disko.nix"
+
+echo "Running disko for host folder: $HOST_FOLDER"
+nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format "$HOST_FOLDER/disko.nix"
+
+echo "Disk destroyed and formatted. Now mounting..."
+nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode mount "$HOST_FOLDER/disko.nix"
