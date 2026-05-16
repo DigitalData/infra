@@ -8,14 +8,12 @@
           type = "gpt";
           partitions = {
             boot = {
-              priority = 1;
               type = "EF00";
               size = "1G";
               content = {
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "umask=0077" ];
               };
             };
 
@@ -23,8 +21,6 @@
               size = "8G";
               content = {
                 type = "swap";
-                randomEncryption = true;
-                priority = 100;
               };
             };
 
@@ -32,8 +28,11 @@
               size = "100%";
               content = {
                 type = "btrfs";
-                extraArgs = [ "-f" ]; # Override existing partition
-                mountpoint = "/";
+                subvolumes = {
+                  "/root" = {
+                    mountpoint = "/";
+                  };
+                };
               };
             };
           };
