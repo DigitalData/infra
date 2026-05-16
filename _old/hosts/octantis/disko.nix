@@ -1,19 +1,20 @@
-# Run with `sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount /path/to/disko.nix`
 {
   disko.devices = {
-    disk.primary = {
-      device = "/dev/disk/by-id/ata-Corsair_Neutron_GTX_SSD_130479140000971401BB";
+    disk_root = {
       type = "disk";
+      device = "/dev/disk/by-id/ata-Corsair_Neutron_GTX_SSD_130479140000971401BB";
       content = {
         type = "gpt";
         partitions = {
-          ESP = {
+          boot = {
+            priority = 1;
             type = "EF00";
-            size = "500M";
+            size = "1G";
             content = {
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
+              mountOptions = [ "umask=0077" ];
             };
           };
 
@@ -21,15 +22,16 @@
             size = "8G";
             content = {
               type = "swap";
-              resumeDevice = true;
-            };
+              randomEncryption = true;
+              priority = 100;
+            }
           };
 
           root = {
             size = "100%";
             content = {
-              type = "filesystem";
-              format = "btrfs";
+              type = "btrfs";
+              extraArgs = [ "-f" ]; # Override existing partition
               mountpoint = "/";
             };
           };
@@ -37,9 +39,9 @@
       };
     };
 
-    disk.secondary = {
-      device = "/dev/disk/by-id/ata-ST2000DM001-1CH164_Z1E3253L";
+    disk_data = {
       type = "disk";
+      device = "/dev/disk/by-id/ata-ST2000DM001-1CH164_Z1E3253L";
       content = {
         type = "gpt";
         partitions = {
@@ -52,7 +54,7 @@
             };
           };
         };
-      };
+      }
     };
   };
 }
