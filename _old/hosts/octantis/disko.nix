@@ -24,7 +24,7 @@
               type = "swap";
               randomEncryption = true;
               priority = 100;
-            }
+            };
           };
 
           root = {
@@ -54,7 +54,7 @@
             };
           };
         };
-      }
+      };
     };
   };
 }
