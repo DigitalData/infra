@@ -76,6 +76,7 @@
   programs.git = {
     enable = true;
     config = {
+      safe.directory = "/etc/nixos";
       user.name = "DigitalData";
       user.email = "legoxavierlocketravers@gmail.com";
     };
