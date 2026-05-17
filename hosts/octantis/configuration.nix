@@ -89,14 +89,7 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-  programs.ssh = {
-    startAgent = true;
-    knownHosts = {
-      "github.com" = {
-        publicKeyFile = ~/.ssh/id_ed25519_git.pub;
-      }
-    }
-  }
+  programs.ssh.startAgent = true;
 
   # List services that you want to enable:
 
