@@ -4,7 +4,7 @@ if [ -z "$1" ]; then
   exit 1
 fi
 HOST_FOLDER="$1"
-if [ ! -d "~/infra/$HOST_FOLDER" ]; then
+if [ ! -d "$HOST_FOLDER" ]; then
   echo "Error: $HOST_FOLDER is not a directory"
   exit 1
 fi
