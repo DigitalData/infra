@@ -4,7 +4,7 @@
 #!/usr/bin/env bash
 set -e
 if [ -z "$1" ]; then
-  echo "Usage: $0 /path/to/host-module-folder"
+  echo "Usage: $0 /hosts/<hostname>"
   exit 1
 fi
 HOST_FOLDER="$1"
