@@ -21,4 +21,11 @@ else
     ssh-add -l | grep -q "id_ed25519_git_config" || ssh-add ~/.ssh/id_ed25519_git_config
 fi
 
+# if infra repo exists, update git remote URL to use SSH instead of HTTPS
+if [ -e "$HOME/infra" ]; then
+    echo "Updating git remote URL to use SSH instead of HTTPS:"
+    cd "$HOME/infra"
+    git remote set-url origin "git@github.com:DigitalData/infra.git"
+fi
+
 cd "${CURRENT_DIR}"
