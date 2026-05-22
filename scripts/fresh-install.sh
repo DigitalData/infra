@@ -18,10 +18,10 @@ if [ ! -e "$HOST_PATH" ]; then
 fi
 
 echo "Running disko for host folder: $HOST_PATH"
-nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy "$HOST_PATH/disko.nix"
+nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy "$HOST_PATH/disk.nix"
 
 echo "Disk destroyed and formatted. Now mounting..."
-nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode format,mount "$HOST_PATH/disko.nix"
+nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode format,mount "$HOST_PATH/disk.nix"
 
 echo "Disk disko complete. Now generating NixOS configuration for new host..."
 sudo nixos-generate-config --no-filesystems --root /mnt
