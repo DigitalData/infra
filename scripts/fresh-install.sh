@@ -9,7 +9,8 @@ if [ ! -d "$HOST_FOLDER" ]; then
   exit 1
 fi
 
-if [ ! -d "~/infra" ]; then
+# if the path exists, no need to clone.
+if [ ! -e "~/infra" ]; then
   echo "Cloning infra repository to /etc/nixos for installation..."
   git clone https://github.com/DigitalData/infra.git ~/infra
 fi
