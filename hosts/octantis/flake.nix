@@ -20,15 +20,16 @@
     nixosConfigurations.octantis = nixpkgs.lib.nixosSystem {
       modules = [
         disko.nixosModules.disko
+        # Import old configuration
+	      ./configuration.nix
+        ./disk.nix
+        
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.digitaldata = import ./home.nix;
         }
-        # Import old configuration
-	      ./configuration.nix
-        ./disk.nix
       ];
     };
   };

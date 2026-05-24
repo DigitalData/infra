@@ -21,8 +21,8 @@
     enable = true;
     shellAliases = {
       "rebuild-os" = "sudo nixos-rebuild switch --flake /etc/nixos/hosts/${config.networking.hostName}#${config.networking.hostName}";
-    }
-  }
+    };
+  };
   
   home.stateVersion = "25.11";
 }
