@@ -73,15 +73,6 @@
   #  wget
   ];
 
-  programs.git = {
-    enable = true;
-    config = {
-      safe.directory = "/etc/nixos";
-      user.name = "DigitalData";
-      user.email = "legoxavierlocketravers@gmail.com";
-    };
-  };
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
