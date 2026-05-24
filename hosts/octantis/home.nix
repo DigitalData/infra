@@ -10,9 +10,9 @@
 
   programs.git = {
     enable = true;
-    userName = "DigitalData";
-    userEmail = "legoxavierlocketravers@gmail.com";
     settings = {
+      user.name = "DigitalData";
+      user.email = "legoxavierlocketravers@gmail.com";
       safe.directory = "/etc/nixos";
     };
   };
