@@ -19,7 +19,7 @@
 
   programs.bash = {
     enable = true;
-    loginShellInit = ''neofetch'';
+    initExtra = ''neofetch'';
     shellAliases = {
       "rebuild-os" = "sudo nixos-rebuild switch --flake /etc/nixos/hosts/octantis";
     };
