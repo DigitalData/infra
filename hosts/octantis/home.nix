@@ -19,7 +19,7 @@
 
   programs.bash = {
     enable = true;
-    initExtra = ''neofetch'';
+    initExtra = ''clear && neofetch'';
     shellAliases = {
       "os-rebuild" = "sudo nixos-rebuild switch --flake /etc/nixos/hosts/octantis";
       "os-git-auth" = "sh /etc/nixos/scripts/config/git-authenticate.sh";
