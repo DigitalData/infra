@@ -21,7 +21,9 @@
     enable = true;
     initExtra = ''neofetch'';
     shellAliases = {
-      "rebuild-os" = "sudo nixos-rebuild switch --flake /etc/nixos/hosts/octantis";
+      "os-rebuild" = "sudo nixos-rebuild switch --flake /etc/nixos/hosts/octantis";
+      "os-git-auth" = "sh /etc/nixos/scripts/config/git-authenticate.sh";
+      "os-pull" = "sh /etc/nixos/scripts/config/os-pull.sh";
     };
   };
   
