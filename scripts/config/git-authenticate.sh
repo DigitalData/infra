@@ -18,14 +18,14 @@ if ! pgrep -x "ssh-agent" > /dev/null; then
     ssh-add ~/.ssh/id_ed25519_git_config
 else
     echo "ssh-agent is already running, adding SSH key for git authentication:"
-    ssh-add -l | grep -q "id_ed25519_git_config" || ssh-add ~/.ssh/id_ed25519_git_config
+    ssh-add -L | grep -f ~/.ssh/id_ed25519_git_config.pub || ssh-add ~/.ssh/id_ed25519_git_config
 fi
 
 # if infra repo exists, update git remote URL to use SSH instead of HTTPS
-if [ -e "/etc/nixos" ]; then
+if [ "$(git remote get-url origin)" != "git@github.com:DigitalData/infra.git" ]; then
     echo "Updating git remote URL to use SSH instead of HTTPS:"
     cd "/etc/nixos"
     git remote set-url origin "git@github.com:DigitalData/infra.git"
 fi
 
-cd "${CURRENT_DIR}"
+cd "$CURRENT_DIR"
