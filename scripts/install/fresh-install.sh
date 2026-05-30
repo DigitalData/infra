@@ -40,3 +40,6 @@ sudo nixos-install --root /mnt --no-root-passwd --flake "$HOST_PATH#$HOST_NAME"
 
 echo "Disk installation complete. Now setting admin password for new host..."
 sudo nixos-enter --root /mnt -c "sudo passwd $ADMIN_USER"
+
+echo "Set ownership of /etc/nixos to $ADMIN_USER and exiting..."
+sudo nixos-enter --root /mnt -c "sudo chown -R $ADMIN_USER /etc/nixos"
