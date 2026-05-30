@@ -23,7 +23,7 @@
     shellAliases = {
       "os-config" = ''_BACK_DIR="$(realpath .)" && cd /etc/nixos'';
       "os-back" = ''cd "$_BACK_DIR"'';
-      "os-rebuild" = ''sudo nixos-rebuild switch --flake /etc/nixos/hosts/octantis'';
+      "os-rebuild" = ''sudo nixos-rebuild switch --flake /etc/nixos'';
       "os-git-auth" = ''sh /etc/nixos/scripts/config/git-authenticate.sh'';
       "os-pull" = ''sh /etc/nixos/scripts/config/os-pull.sh'';
     };
