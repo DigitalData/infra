@@ -3,8 +3,8 @@
 
   flake.nixosConfigurations.octantis = inputs.nixpkgs.lib.nixosSystem {
     modules = [
-      inputs.nixosModules._base
       inputs.disko.nixosModules.disko
+      self.nixosModules._base
       self.nixosModules.octantis
       ../../old_hosts/octantis/disk.nix
       inputs.home-manager.nixosModules.home-manager
