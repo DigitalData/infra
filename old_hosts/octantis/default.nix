@@ -6,7 +6,6 @@
       modules = [
         inputs.disko.nixosModules.disko
         # Import old configuration
-        ./configuration.nix
         ./disk.nix
         
         inputs.home-manager.nixosModules.home-manager
