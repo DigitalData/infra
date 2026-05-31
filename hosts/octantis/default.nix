@@ -5,6 +5,7 @@
     modules = [
       inputs.disko.nixosModules.disko
       self.nixosModules._base
+      self.nixosHardwareModules.octantis
       self.nixosModules.octantis
       ../../old_hosts/octantis/disk.nix
       inputs.home-manager.nixosModules.home-manager

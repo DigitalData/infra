@@ -2,8 +2,6 @@
 {
 
   flake.nixosModules.octantis = { pkgs, config, ... }: {
-    imports = [ self.nixosHardwareModules.octantis ];
-
     networking.hostName = "octantis"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
