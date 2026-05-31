@@ -7,7 +7,7 @@
       self.nixosModules._base
       self.nixosHardwareModules.octantis
       self.nixosModules.octantis
-      ../../old_hosts/octantis/disk.nix
+      self.nixosDiskModules.octantis
       inputs.home-manager.nixosModules.home-manager
       {
         home-manager = {
