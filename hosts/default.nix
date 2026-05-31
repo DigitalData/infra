@@ -1,6 +1,6 @@
 {
 
-  flake.nixosModules._base = { config, modulesPath, ... }:
+  flake.nixosModules._base = { config, lib, modulesPath, ... }:
   {
     imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
@@ -52,7 +52,7 @@
     };
 
     # Allow unfree packages
-    nixpkgs.config.allowUnfree = false;
+    nixpkgs.config.allowUnfree = lib.mkDefault false;
 
     # Enables experimental features (mainly Flakes).
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
