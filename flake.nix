@@ -25,8 +25,10 @@
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } 
-    ( inputs.import-tree [
-      ./modules 
-      (i: i.filter (builtins.hasInfix "default.nix") ./hosts)
-    ] );
+    {
+      imports = [
+        inputs.import-tree ./modules
+        ./hosts/octantis
+      ];
+    };
 }
