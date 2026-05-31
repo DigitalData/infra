@@ -6,7 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     # Iterative-deepening module imports
-    inputs.import-tree.url = "github:denful/import-tree";
+    import-tree.url = "github:denful/import-tree";
 
     # Config modularization
     flake-parts.url = "github:hercules-ci/flake-parts";
