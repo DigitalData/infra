@@ -4,6 +4,11 @@
   {
     imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
+    home-manager = {
+      useGlobalPkgs = true;
+      useUserPackages = true;
+    };
+
     # Bootloader.
     boot.loader = {
       systemd-boot.enable = true;

@@ -8,8 +8,6 @@
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-    # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.digitaldata = {
       isNormalUser = true;
       description = "DigitalData";
@@ -17,7 +15,12 @@
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILk4bC/9jWdrMGhuJTfIVpc+YyEULpFKaGQHIL2sRtV8 digitaldata@octantis"
       ];
-      packages = with pkgs; [];
+      packages = with pkgs; [
+        neovim
+      ];
+    };
+    home-manager = {
+      users.digitaldata = self.homeModules.digitaldata;
     };
 
     # Allow unfree packages
