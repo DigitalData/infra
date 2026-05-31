@@ -1,6 +1,6 @@
 {
 
-  flake.nixosModules._base = { modulesPath, ... }:
+  flake.nixosModules._base = { config, modulesPath, ... }:
   {
     imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
