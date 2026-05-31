@@ -8,6 +8,7 @@
     boot.kernelModules = [ "kvm-intel" ];
     boot.extraModulePackages = [ ];
 
+    # NVIDIA Support
     services.xserver.videoDrivers = [ "nvidia" ];
     hardware = {
       nvidia-container-toolkit.enable = true;
@@ -19,6 +20,10 @@
         nvidiaSettings = true;
         package = config.boot.kernelPackages.nvidiaPackages.stable;
       };
+    };
+    nixpkgs.config = {
+      nvidia.acceptLicense = true;
+      cudaSupport = true;
     };
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

@@ -51,9 +51,6 @@
       LC_TIME = "en_AU.UTF-8";
     };
 
-    # Allow unfree packages
-    nixpkgs.config.allowUnfree = lib.mkDefault false;
-
     # Enables experimental features (mainly Flakes).
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     
