@@ -2,10 +2,7 @@
 {
 
   flake.nixosModules.octantis = { pkgs, config, ... }: {
-    imports =
-      [ # Include the results of the hardware scan.
-        ../../old_hosts/octantis/hardware-configuration.nix
-      ];
+    imports = [ self.nixosHardwareModules.octantis ];
 
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
