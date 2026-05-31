@@ -27,6 +27,6 @@
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } 
     ( inputs.import-tree [
       ./modules 
-      (i: i.filter (hasInfix "default.nix") ./hosts)
+      (i: i.filter (builtins.hasInfix "default.nix") ./hosts)
     ] );
 }
