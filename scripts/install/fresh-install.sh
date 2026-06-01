@@ -32,7 +32,8 @@ if [ -f "$HOST_PATH/disks.nix" ]; then
   sudo nixos-generate-config --no-filesystems --root /mnt --show-hardware-config > "$HOST_PATH/hardware-configuration.nix"
 else
   echo "No disks.nix found for host. Skipping disko and generating hardware configuration."
-  sudo nixos-generate-config --show-hardware-config > "$HOST_PATH/hardware-configuration.nix"
+  sudo nixos-generate-config --show-hardware-config > "hardware-configuration.nix"
+  echo "Please convert this into a NixOS module."
 fi
 
 echo "Generated hardware configuration. Now installing NixOS to disk..."
