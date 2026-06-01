@@ -1,15 +1,17 @@
 { self, inputs, ... }:
 {
   flake.userModules.digitaldata = { pkgs, ... }: {
-    isNormalUser = true;
-    description = "DigitalData";
-    extraGroups = [ "networkmanager" "wheel" ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILk4bC/9jWdrMGhuJTfIVpc+YyEULpFKaGQHIL2sRtV8 digitaldata@octantis"
-    ];
-    packages = with pkgs; [
-      neovim
-    ];
+    users.users.digitaldata = {
+      isNormalUser = true;
+      description = "DigitalData";
+      extraGroups = [ "networkmanager" "wheel" ];
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILk4bC/9jWdrMGhuJTfIVpc+YyEULpFKaGQHIL2sRtV8 digitaldata@octantis"
+      ];
+      packages = with pkgs; [
+        neovim
+      ];
+    };
   };
 
   flake.homeModules.digitaldata = { pkgs, ... }: {
