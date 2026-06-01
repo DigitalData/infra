@@ -21,17 +21,17 @@ if [ -z "$ADMIN_USER" ]; then
   exit 1
 fi
 
-if [ -f "$HOST_PATH/disk.nix" ]; then
+if [ -f "$HOST_PATH/disks.nix" ]; then
   echo "Running disko for host folder: $HOST_PATH"
-  sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy "$HOST_PATH/disk.nix"
+  sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy --flake .#$HOST_NAME
 
   echo "Disk destroyed and formatted. Now mounting..."
-  sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode format,mount "$HOST_PATH/disk.nix"
+  sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode format,mount --flake .#$HOST_NAME
 
   echo "Disk disko complete. Now generating hardware configuration for new host..."
   sudo nixos-generate-config --no-filesystems --root /mnt --show-hardware-config > "$HOST_PATH/hardware-configuration.nix"
 else
-  echo "No disk.nix found for host. Skipping disko and generating hardware configuration."
+  echo "No disks.nix found for host. Skipping disko and generating hardware configuration."
   sudo nixos-generate-config --show-hardware-config > "$HOST_PATH/hardware-configuration.nix"
 fi
 
