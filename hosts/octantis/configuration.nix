@@ -8,17 +8,7 @@
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-    users.users.digitaldata = {
-      isNormalUser = true;
-      description = "DigitalData";
-      extraGroups = [ "networkmanager" "wheel" ];
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILk4bC/9jWdrMGhuJTfIVpc+YyEULpFKaGQHIL2sRtV8 digitaldata@octantis"
-      ];
-      packages = with pkgs; [
-        neovim
-      ];
-    };
+    users.users.digitaldata = self.userModules.digitaldata;
     home-manager = {
       users.digitaldata = self.homeModules.digitaldata;
     };
