@@ -1,5 +1,5 @@
 {
-  flake.nixosDiskModules.octantis = {
+  flake.diskoConfigurations.octantis = {
     disko.devices = {
       disk = {
         main = {

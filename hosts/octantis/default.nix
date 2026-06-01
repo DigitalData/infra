@@ -5,7 +5,7 @@
     modules = [
       self.nixosHardwareModules.octantis
       inputs.disko.nixosModules.disko
-      self.nixosDiskModules.octantis
+      self.diskoConfigurations.octantis
       inputs.home-manager.nixosModules.home-manager
       self.nixosModules._base
       self.nixosModules.octantis
