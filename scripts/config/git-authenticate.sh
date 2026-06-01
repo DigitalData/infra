@@ -22,9 +22,9 @@ else
 fi
 
 # if infra repo exists, update git remote URL to use SSH instead of HTTPS
+cd /etc/nixos
 if [ "$(git remote get-url origin)" != "git@github.com:DigitalData/infra.git" ]; then
     echo "Updating git remote URL to use SSH instead of HTTPS:"
-    cd "/etc/nixos"
     git remote set-url origin "git@github.com:DigitalData/infra.git"
 fi
 
