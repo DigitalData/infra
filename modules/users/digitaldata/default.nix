@@ -24,6 +24,11 @@
       stateVersion = "25.11";
     };
 
+    services.ssh-agent = {
+      enable = true;
+      enabledBashIntegration = true;
+    };
+
     programs = {
       git = {
         enable = true;
