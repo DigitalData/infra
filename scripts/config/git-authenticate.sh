@@ -1,6 +1,6 @@
 
 USER="$(whoami)"
-CURRENT_DIR="$(dirname "$(realpath "$0")")"
+CURRENT_DIR="$(realpath .)"
 
 # if not exists, generate SSH key for git authentication
 if [ ! -f ~/.ssh/id_ed25519_git_config ]; then
