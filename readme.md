@@ -32,3 +32,9 @@ Hopefully using Nix and NixOS will allow me to trust my dev environment more.
 | --- | --- |
 | [New Host Guide](./docs/new-host.md) | Instructions for adding a new host to this repository and initializing it. |
 | [Glossary](./docs/glossary.md) | Definitions of key terms used in this repository. |
+
+## Reference Articles
+- [Renato Garcia](https://renatogarcia.blog.br/posts/a-simple-nix-dendritic-config.html)
+  - [Associated Reddit Post](https://old.reddit.com/r/NixOS/comments/1so8ymk/a_simple_nix_dendritic_config/)
+- [Filip Ruman](https://filip-ruman.pages.dev/nixos_config/config_structure/)
+- [Dendrix](https://dendrix.denful.dev)
