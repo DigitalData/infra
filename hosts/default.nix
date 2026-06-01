@@ -22,11 +22,12 @@
     services = {
       openssh = {
         enable = true;
+        openFirewall = true;
         settings = {
           X11Forwarding = true;
           PasswordAuthentication = false;
+          PermitRootLogin = "no";
         };
-        openFirewall = true;
       };
       xserver.xkb = {
         layout = "us";
