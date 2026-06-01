@@ -27,7 +27,7 @@
 
     services.ssh-agent = {
       enable = true;
-      enabledBashIntegration = true;
+      enableBashIntegration = true;
     };
 
     programs = {
