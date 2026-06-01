@@ -10,7 +10,7 @@
     packages = with pkgs; [
       neovim
     ];
-  }}
+  };
 
   flake.homeModules.digitaldata = { pkgs, ... }: {
     home = {
