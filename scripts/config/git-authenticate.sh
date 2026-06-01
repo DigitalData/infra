@@ -4,8 +4,8 @@ CURRENT_DIR="$(realpath .)"
 
 # if not exists, generate SSH key for git authentication
 if [ ! -f ~/.ssh/id_ed25519_git_config ]; then
-    echo "Generating git SSH Key for ${USER}@${HOSTNAME}:"
-    ssh-keygen -t ed25519 -C "${USER}@${HOSTNAME}" -f ~/.ssh/id_ed25519_git_config
+    echo "Generating git SSH Key for ${USER}@$(hostname):"
+    ssh-keygen -t ed25519 -C "${USER}@$(hostname)" -f ~/.ssh/id_ed25519_git_config
     echo "Please add the following public SSH key to git with write access:"
     cat ~/.ssh/id_ed25519_git_config.pub
 fi

@@ -34,10 +34,6 @@
       };
     };
     
-    environment.variables = {
-      HOSTNAME = config.networking.hostName;
-    };
-
     # Set your time zone.
     time.timeZone = "Australia/Melbourne";
 

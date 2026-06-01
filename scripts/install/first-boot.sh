@@ -1,5 +1,4 @@
 USER="$(whoami)"
-HOSTNAME="$(hostname)"
 
 echo "Changing ownership of /etc/nixos to $USER..."
 sudo chown -R "$USER" /etc/nixos
@@ -16,7 +15,7 @@ git remote set-url origin git@github.com:DigitalData/infra.git
 # add the updated hardware configuration
 echo "Adding updated hardware configuration to git..."
 git add hosts/*/hardware-configuration.nix
-git commit -m "$HOSTNAME / Hardware Configuration"
+git commit -m "$(hostname) / Hardware Configuration"
 git push
 
 # pull latest changes
