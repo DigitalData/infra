@@ -17,6 +17,24 @@
     networking.hostName = "octantis"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+    # NVIDIA Support
+    services.xserver.videoDrivers = [ "nvidia" ];
+    hardware = {
+      nvidia-container-toolkit.enable = true;
+      nvidia = {
+        modesetting.enable = true;
+        powerManagement.enable = false;
+        powerManagement.finegrained = false;
+        open = false;
+        nvidiaSettings = true;
+        package = config.boot.kernelPackages.nvidiaPackages.stable;
+      };
+    };
+    nixpkgs.config = {
+      nvidia.acceptLicense = true;
+      cudaSupport = true;
+    };
+
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";

@@ -2,8 +2,6 @@
 
   flake.nixosModules._base = { config, lib, modulesPath, ... }:
   {
-    imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
-
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
