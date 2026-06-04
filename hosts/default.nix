@@ -2,12 +2,6 @@
 
   flake.modules.nixos.base = { config, lib, ... }:
   {
-
-    environment.variables = {
-      # Set the default editor for the system. This is used by programs like `git` and `nixos-rebuild` when they need to open an editor.
-      HOME_USERS = builtins.toString config;
-    };
-
     home-manager = {
       useGlobalPkgs = lib.mkDefault true;
       useUserPackages = lib.mkDefault true;
