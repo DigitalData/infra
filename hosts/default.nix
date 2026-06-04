@@ -8,7 +8,7 @@
     };
 
     environment.variables = {
-      HOME_USERS = builtins.toString (builtins.attrNames config.home-manager.users);
+      HOME_USERS = lib.strings.concatStrings (builtins.attrNames config.home-manager.users);
     };
 
     # Bootloader.
