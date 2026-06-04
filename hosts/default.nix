@@ -7,6 +7,10 @@
       useUserPackages = lib.mkDefault true;
     };
 
+    environment.variables = {
+      HOME_USERS = builtins.toString (builtins.attrNames config.home-manager.users);
+    };
+
     # Bootloader.
     boot.loader = {
       systemd-boot.enable = true;
