@@ -6,6 +6,9 @@
       useGlobalPkgs = lib.mkDefault true;
       useUserPackages = lib.mkDefault true;
     };
+    
+    # Disable unfree packages by default, override in host configuration if necessary
+    nixpkgs.config.allowUnfree = lib.mkDefault false;
 
     # Bootloader.
     boot.loader = {
