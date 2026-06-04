@@ -29,7 +29,7 @@ if [ -f "$HOST_PATH/disks.nix" ]; then
   sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode format,mount --flake .#$HOST_NAME
 
   echo "Disk disko complete. Now generating hardware configuration for new host..."
-  sudo nixos-generate-config --no-filesystems --root /mnt --show-hardware-config > "$HOST_PATH/hardware-configuration.nix"
+  sudo nixos-generate-config --no-filesystems --root /mnt --show-hardware-config > "hardware-configuration.nix"
 else
   echo "No disks.nix found for host. Skipping disko and generating hardware configuration."
   sudo nixos-generate-config --show-hardware-config > "hardware-configuration.nix"

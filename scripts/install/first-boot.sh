@@ -1,20 +1,21 @@
 USER="$(whoami)"
 
-echo "Changing ownership of /etc/nixos to $USER..."
-sudo chown -R "$USER" /etc/nixos
-cd /etc/nixos
+echo "Copying /etc/nixos to ~/infra for git management..."
+cp -r /etc/nixos ~/infra
 
-# git authentication
-echo "Authenticating git access to GitHub..."
+echo "Clear /etc/nixos"
+sudo rm -rf /etc/nixos/*
+
+echo "Creating symlink from ~/infra to /etc/nixos..."
+sudo ln -s ~/infra /etc/nixos
+
+echo "Initial authentication with git to GitHub..."
 sh /etc/nixos/scripts/config/git-authenticate.sh
-
-# remap origin to use ssh
-echo "Changing git remote URL to use SSH..."
-git remote set-url origin git@github.com:DigitalData/infra.git
 
 # add the updated hardware configuration
 echo "Adding updated hardware configuration to git..."
-git add hosts/*/hardware-configuration.nix
+cd /etc/nixos
+git add hardware-configuration.nix
 git commit -m "$(hostname) / Hardware Configuration"
 git push
 
@@ -22,3 +23,7 @@ git push
 echo "Pulling latest changes from GitHub..."
 git fetch origin
 git pull
+
+echo "First boot configuration complete."
+echo "Please encapsulate the hardware configuration in a dendritic modules (refer to octantis)."
+# TODO: Automate the above.
