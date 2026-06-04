@@ -1,10 +1,10 @@
 {
 
-  flake.nixosModules._base = { config, lib, modulesPath, ... }:
+  flake.modules.nixos.base = { config, lib, modulesPath, ... }:
   {
-    home-manager = {
-      useGlobalPkgs = true;
-      useUserPackages = true;
+    home-manager = lib.mkIf ((builtins.attrNames config.home-manager.users) != []) {
+      useGlobalPkgs = lib.mkDefault true;
+      useUserPackages = lib.mkDefault true;
     };
 
     # Bootloader.

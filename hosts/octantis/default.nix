@@ -5,8 +5,9 @@
     modules = [
       inputs.disko.nixosModules.disko
       self.diskoConfigurations.octantis
+
       inputs.home-manager.nixosModules.home-manager
-      self.nixosModules._base
+      self.modules.nixos.base
       self.nixosModules.octantis
       self.userModules.digitaldata
     ];
