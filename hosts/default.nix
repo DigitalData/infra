@@ -5,7 +5,7 @@
 
     environment.variables = {
       # Set the default editor for the system. This is used by programs like `git` and `nixos-rebuild` when they need to open an editor.
-      HOME_USERS = builtins.toString config.home-manager.users;
+      HOME_USERS = builtins.toString config;
     };
 
     home-manager = {
