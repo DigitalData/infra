@@ -29,7 +29,7 @@
     imports = [
       inputs.disko.flakeModules.disko
       inputs.home-manager.flakeModules.home-manager
-      inputs.import-tree [./modules ./hosts]
+      (inputs.import-tree [./modules ./hosts])
     ];
 
     systems = [ "x86_64-linux" "aarch64-darwin" ];
