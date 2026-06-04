@@ -9,7 +9,7 @@
     
     environment.variables = {
       # Set the default editor to Neovim
-      users = builtins.toString (builtins.attrNames config.home-manager.users);
+      HOME_USERS = builtins.toString (builtins.attrNames config.home-manager.users);
     };
 
     # Disable unfree packages by default, override in host configuration if necessary
