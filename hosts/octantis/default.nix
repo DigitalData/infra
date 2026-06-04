@@ -38,9 +38,9 @@
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-    home-manager = {
-      users.digitaldata = self.homeModules.digitaldata;
-    };
+    # home-manager = {
+    #   users.digitaldata = self.homeModules.digitaldata;
+    # };
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = lib.mkForce true;

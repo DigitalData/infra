@@ -7,7 +7,7 @@
       useUserPackages = lib.mkDefault true;
     };
     
-    environnment.variables = {
+    environment.variables = {
       # Set the default editor to Neovim
       users = builtins.attrNames config.home-manager.users;
     };
