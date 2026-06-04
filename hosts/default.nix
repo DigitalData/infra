@@ -2,13 +2,10 @@
 
   flake.modules.nixos.base = { config, lib, ... }:
   {
-    home-manager = {
+    home-manager = lib.mkIf (builtins.attrNames config.home-manager.users != []) {
       useGlobalPkgs = lib.mkDefault true;
       useUserPackages = lib.mkDefault true;
     };
-
-    # Disable unfree packages by default, override in host configuration if necessary
-    nixpkgs.config.allowUnfree = lib.mkDefault false;
 
     # Bootloader.
     boot.loader = {
