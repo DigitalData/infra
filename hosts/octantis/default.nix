@@ -7,6 +7,10 @@
       self.diskoConfigurations.octantis
 
       inputs.home-manager.nixosModules.home-manager
+      {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+      };
       self.modules.nixos.base
       self.nixosModules.octantis
       self.userModules.digitaldata

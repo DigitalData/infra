@@ -2,15 +2,6 @@
 
   flake.modules.nixos.base = { config, lib, ... }:
   {
-    home-manager = lib.mkIf (builtins.attrNames config.home-manager.users != []) {
-      useGlobalPkgs = lib.mkDefault true;
-      useUserPackages = lib.mkDefault true;
-    };
-
-    environment.variables = {
-      HOME_USERS = lib.strings.concatStrings (builtins.attrNames config);
-    };
-
     # Bootloader.
     boot.loader = {
       systemd-boot.enable = true;
