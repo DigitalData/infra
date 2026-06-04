@@ -43,7 +43,7 @@
     };
 
     # Allow unfree packages
-    nixpkgs.config.allowUnfree = lib.mkForce true;
+    nixpkgs.config.allowUnfree = true;
 
     # List packages installed in system profile. To search, run:
     # $ nix search wget
