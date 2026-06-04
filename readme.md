@@ -34,6 +34,7 @@ Hopefully using Nix and NixOS will allow me to trust my dev environment more.
 | [Glossary](./docs/glossary.md) | Definitions of key terms used in this repository. |
 
 ## Reference Articles
+- [Vimjoyer](https://github.com/vimjoyer/nixconf)
 - [Renato Garcia](https://renatogarcia.blog.br/posts/a-simple-nix-dendritic-config.html)
   - [Associated Reddit Post](https://old.reddit.com/r/NixOS/comments/1so8ymk/a_simple_nix_dendritic_config/)
 - [Filip Ruman](https://filip-ruman.pages.dev/nixos_config/config_structure/)
