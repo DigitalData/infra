@@ -1,12 +1,17 @@
 {
 
-  flake.modules.nixos.base = { config, lib, modulesPath, ... }:
+  flake.modules.nixos.base = { config, lib, ... }:
   {
     home-manager = lib.mkIf ((builtins.attrNames config.home-manager.users) != []) {
       useGlobalPkgs = lib.mkDefault true;
       useUserPackages = lib.mkDefault true;
     };
     
+    environnment.variables = {
+      # Set the default editor to Neovim
+      users = builtins.attrNames config.home-manager.users;
+    };
+
     # Disable unfree packages by default, override in host configuration if necessary
     nixpkgs.config.allowUnfree = lib.mkDefault false;
 

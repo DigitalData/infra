@@ -13,7 +13,7 @@
     ];
   };
 
-  flake.nixosModules.octantis = { pkgs, config, ... }: {
+  flake.nixosModules.octantis = { pkgs, config, lib, ... }: {
     networking.hostName = "octantis"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
