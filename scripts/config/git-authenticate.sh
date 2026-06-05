@@ -1,11 +1,11 @@
 
 USER="$(whoami)"
-CURRENT_DIR="$(dirname "$(realpath "$0")")"
+CURRENT_DIR="$(realpath .)"
 
 # if not exists, generate SSH key for git authentication
 if [ ! -f ~/.ssh/id_ed25519_git_config ]; then
-    echo "Generating git SSH Key for ${USER}@${HOSTNAME}:"
-    ssh-keygen -t ed25519 -C "${USER}@${HOSTNAME}" -f ~/.ssh/id_ed25519_git_config
+    echo "Generating git SSH Key for ${USER}@$(hostname):"
+    ssh-keygen -t ed25519 -C "${USER}@$(hostname)" -f ~/.ssh/id_ed25519_git_config
     echo "Please add the following public SSH key to git with write access:"
     cat ~/.ssh/id_ed25519_git_config.pub
 fi
@@ -22,9 +22,9 @@ else
 fi
 
 # if infra repo exists, update git remote URL to use SSH instead of HTTPS
+cd /etc/nixos
 if [ "$(git remote get-url origin)" != "git@github.com:DigitalData/infra.git" ]; then
     echo "Updating git remote URL to use SSH instead of HTTPS:"
-    cd "/etc/nixos"
     git remote set-url origin "git@github.com:DigitalData/infra.git"
 fi
 
