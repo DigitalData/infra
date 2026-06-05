@@ -13,6 +13,7 @@
       }
       
       self.modules.nixos.base
+      self.modules.nixos.arr
       self.nixosModules.octantis
       self.userModules.digitaldata
     ];
