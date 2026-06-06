@@ -23,7 +23,7 @@
     networking.hostName = "octantis"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-    config.media.dir = /data/media;
+    media.dir = /data/media;
 
     # NVIDIA Support
     services.xserver.videoDrivers = [ "nvidia" ];
