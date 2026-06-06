@@ -1,6 +1,6 @@
-{ self, inputs, lib, ... }:
+{ self, inputs, ... }:
 {
-  flake.modules.nixos.arr = { pkgs, ... }: {
+  flake.modules.nixos.arr = { pkgs, lib, ... }: {
 
     options.mediaDir = lib.mkOption {
       type = lib.types.absolutePath;
