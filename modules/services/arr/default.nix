@@ -1,19 +1,16 @@
-{ config, ... }:
+{ ... }:
 {
 
   flake.modules.nixos.base = { lib, ... }: {
-    options.media = lib.mkOption {
-      description = "Configuration for media services.";
-      type = lib.types.submodule {
-        options.dir = lib.mkOption {
-          type = lib.types.path;
-          description = "Path to the media directory.";
-        };
+    options.media = {
+      dir = lib.mkOption {
+        type = lib.types.path;
+        description = "Path to the media directory.";
       };
     };
   };
 
-  flake.modules.nixos.arr = { pkgs, ... }: {
+  flake.modules.nixos.arr = { config, pkgs, ... }: {
     services.jellyfin = {
       enable = true;
       openFirewall = true;
@@ -22,7 +19,7 @@
     services.qbittorrent = {
       enable = true;
       openFirewall = true;
-      profileDir = config.preferences.media.dir;
+      profileDir = config.media.dir;
     };
 
     # Request manager
