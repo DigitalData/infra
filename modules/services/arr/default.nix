@@ -30,7 +30,7 @@
     services.qbittorrent = {
       enable = true;
       openFirewall = true;
-      serverConfig.BitTorrent.DefaultSavePath = config.media.torrentDir;
+      serverConfig.BitTorrent.Session.DefaultSavePath = config.media.torrentDir;
     };
 
     # Request manager
