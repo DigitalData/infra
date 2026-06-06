@@ -1,7 +1,7 @@
 { self, inputs, ... }:
 {
   flake.modules.nixos.arr = { pkgs, ... }: {
-    services.jellyfin.enable = {
+    services.jellyfin = {
       enable = true;
       openFirewall = true;
     };
