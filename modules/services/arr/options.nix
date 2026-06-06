@@ -4,7 +4,7 @@
     description = "Configuration for arr services.";
     type = lib.types.submodule {
       options.mediaDir = lib.mkOption {
-        type = lib.types.absolutePath;
+        type = lib.types.path;
         description = "Path to the arr media directory.";
       };
     };
