@@ -10,7 +10,7 @@
     services.qbittorrent = {
       enable = true;
       openFirewall = true;
-      profileDir = config.arr.mediaDir;
+      profileDir = config.media.dir;
     };
 
     # Request manager
