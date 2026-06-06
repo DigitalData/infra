@@ -1,6 +1,18 @@
 { config, ... }:
 {
 
+  flake.modules.nixos.base = { pkgs, ... }: {
+    options.media = lib.mkOption {
+      description = "Configuration for media services.";
+      type = lib.types.submodule {
+        options.dir = lib.mkOption {
+          type = lib.types.path;
+          description = "Path to the media directory.";
+        };
+      };
+    };
+  };
+
   flake.modules.nixos.arr = { pkgs, ... }: {
     services.jellyfin = {
       enable = true;
@@ -10,7 +22,7 @@
     services.qbittorrent = {
       enable = true;
       openFirewall = true;
-      profileDir = config.media.dir;
+      profileDir = config.preferences.media.dir;
     };
 
     # Request manager
