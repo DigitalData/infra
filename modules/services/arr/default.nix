@@ -1,13 +1,17 @@
-{ self, inputs, ... }:
+{ self, inputs, lib, ... }:
 {
-  flake.modules.nixos.arr = { pkgs, lib, ... }: {
-
-    options.mediaDir = lib.mkOption {
-      type = lib.types.absolutePath;
-      required = true;
-      description = "Path to the arr media directory.";
+  options.arr = lib.mkOption {
+    description = "Configuration for arr services.";
+    type = lib.types.submodule {
+      options.mediaDir = lib.mkOption {
+        type = lib.types.absolutePath;
+        required = true;
+        description = "Path to the arr media directory.";
+      };
     };
+  };
 
+  flake.modules.nixos.arr = { pkgs, ... }: {
     services.jellyfin = {
       enable = true;
       openFirewall = true;
