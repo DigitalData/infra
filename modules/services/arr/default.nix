@@ -1,7 +1,7 @@
 { config, ... }:
 {
 
-  flake.modules.nixos.base = { pkgs, ... }: {
+  flake.modules.nixos.base = { lib, ... }: {
     options.media = lib.mkOption {
       description = "Configuration for media services.";
       type = lib.types.submodule {
