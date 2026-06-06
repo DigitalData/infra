@@ -24,6 +24,7 @@
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
     media.dir = /data/media;
+    media.torrentDir = /data/torrents;
 
     # NVIDIA Support
     services.xserver.videoDrivers = [ "nvidia" ];

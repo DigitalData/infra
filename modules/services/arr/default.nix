@@ -7,10 +7,21 @@
         type = lib.types.path;
         description = "Path to the media directory.";
       };
+      torrentDir = lib.mkOption {
+        type = lib.types.path;
+        description = "Path to the torrent directory.";
+      };
     };
   };
 
   flake.modules.nixos.arr = { config, pkgs, ... }: {
+
+    # Create required dirs
+    systemd.tmpfiles.rules = [
+      "d ${config.media.dir} 0755 root root -"
+      "d ${config.media.torrentDir} 0755 root root -"
+    ];
+
     services.jellyfin = {
       enable = true;
       openFirewall = true;
@@ -19,7 +30,7 @@
     services.qbittorrent = {
       enable = true;
       openFirewall = true;
-      profileDir = config.media.dir;
+      serverconfig.BitTorrent.DefaultSavePath = config.media.torrentDir;
     };
 
     # Request manager
