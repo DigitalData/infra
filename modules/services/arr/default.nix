@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
 
   flake.modules.nixos.arr = { pkgs, ... }: {
@@ -10,6 +10,7 @@
     services.qbittorrent = {
       enable = true;
       openFirewall = true;
+      profileDir = config.arr.mediaDir;
     };
 
     # Request manager
@@ -48,5 +49,5 @@
       openFirewall = true;
     };
   };
-  
+
 }
