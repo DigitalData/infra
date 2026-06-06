@@ -1,8 +1,15 @@
 { self, inputs, ... }:
 {
   flake.modules.nixos.arr = { pkgs, ... }: {
-    services.jellyfin.enable = true;
-    services.qbittorrent.enable = true;
+    services.jellyfin.enable = {
+      enable = true;
+      openFirewall = true;
+    };
+
+    services.qbittorrent = {
+      enable = true;
+      openFirewall = true;
+    };
 
     # Request manager
     services.jellyseerr = {
