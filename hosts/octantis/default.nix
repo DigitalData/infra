@@ -23,8 +23,8 @@
     networking.hostName = "octantis"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-    media.dir = /data/media;
-    media.torrentDir = /data/torrents;
+    media.dir = "/data/media";
+    media.torrentDir = "/data/torrents";
 
     # NVIDIA Support
     services.xserver.videoDrivers = [ "nvidia" ];

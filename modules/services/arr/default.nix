@@ -4,11 +4,11 @@
   flake.modules.nixos.base = { lib, ... }: {
     options.media = {
       dir = lib.mkOption {
-        type = lib.types.path;
+        type = lib.types.string;
         description = "Path to the media directory.";
       };
       torrentDir = lib.mkOption {
-        type = lib.types.path;
+        type = lib.types.string;
         description = "Path to the torrent directory.";
       };
     };
@@ -31,7 +31,7 @@
       enable = true;
       openFirewall = true;
       serverConfig = {
-        BitTorrent.Session.DefaultSavePath = builtins.toString config.media.torrentDir;
+        BitTorrent.Session.DefaultSavePath = config.media.torrentDir;
       };
     };
 
