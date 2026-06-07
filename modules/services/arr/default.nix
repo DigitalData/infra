@@ -4,11 +4,11 @@
   flake.modules.nixos.base = { lib, ... }: {
     options.media = {
       dir = lib.mkOption {
-        type = lib.types.string;
+        type = lib.types.str;
         description = "Path to the media directory.";
       };
       torrentDir = lib.mkOption {
-        type = lib.types.string;
+        type = lib.types.str;
         description = "Path to the torrent directory.";
       };
     };
