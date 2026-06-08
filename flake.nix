@@ -5,6 +5,8 @@
     # Official NixOS package source, nixos-25.11 branch
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
 
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
     # Iterative-deepening module imports
     import-tree.url = "github:denful/import-tree";
 

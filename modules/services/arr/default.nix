@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 {
 
   flake.modules.nixos.base = { lib, ... }: {
@@ -51,9 +51,10 @@
     };
 
     # Request manager
-    services.jellyseerr = {
+    services.seerr = {
       enable = true;
       openFirewall = true;
+      package = inputs.nixpkgs-unstable.seerr;
     };
 
     # Indexer manager
