@@ -34,6 +34,8 @@
       "d ${config.media.torrentDir} 0775 root media -"
     ];
 
+    networking.wg-quick.interfaces.vpn-unlimited.configFile = "/etc/wireguard/vpn-unlimited.conf";
+
     services.jellyfin = {
       enable = true;
       openFirewall = true;
