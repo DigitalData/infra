@@ -29,9 +29,9 @@
 
     # Create required dirs
     systemd.tmpfiles.rules = lib.flatten [
-      "d ${config.media.dir} 0755 root media -"
-      (builtins.map (pf: "d ${config.media.dir}/${pf} 0755 root media -") [ "movies" "tv" "music" ])
-      "d ${config.media.torrentDir} 0755 root media -"
+      "d ${config.media.dir} 0775 root media -"
+      (builtins.map (pf: "d ${config.media.dir}/${pf} 0775 root media -") [ "movies" "tv" "music" ])
+      "d ${config.media.torrentDir} 0775 root media -"
     ];
 
     services.jellyfin = {
