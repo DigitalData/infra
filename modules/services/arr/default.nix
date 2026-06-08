@@ -30,6 +30,9 @@
     services.qbittorrent = {
       enable = true;
       openFirewall = true;
+      extraArgs = [
+        "--confirm-legal-notice"
+      ];
       serverConfig = {
         BitTorrent.Session.DefaultSavePath = config.media.torrentDir;
       };
