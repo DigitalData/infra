@@ -64,6 +64,12 @@
       openFirewall = true;
     };
 
+    # Bypass cloudflare protection for indexers
+    services.flaresolverr = {
+      enable = true;
+      openFirewall = true;
+    };
+
     # Movies
     services.radarr = {
       enable = true;
