@@ -1,8 +1,0 @@
-- [x] bazarr: Manage/download subtitles
-- [x] jellyseerr: Manage requests for media library
-- [x] lidarr: Music collection manager
-- [x] prowlarr: Indexer manager
-- [x] radarr: Movie collection manager
-- [x] sonarr: TV show collection manager
-- [x] jellyfin: Media server
-- [x] qbittorrent: Torrent client
