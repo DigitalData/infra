@@ -14,7 +14,7 @@
     };
   };
 
-  flake.modules.nixos.arr = { config, pkgs, ... }: {
+  flake.modules.nixos.arr = { lib, config, pkgs, ... }: {
 
     # Create a media group and add all relevant users to it
     users.groups.media.members = [
@@ -28,7 +28,7 @@
     ];
 
     # Create required dirs
-    systemd.tmpfiles.rules = flatten [
+    systemd.tmpfiles.rules = lib.flatten [
       "d ${config.media.dir} 0755 root media -"
       (builtins.map (pf: "d ${config.media.dir}/${pf} 0755 root media -") [ "movies" "tv" "music" ])
       "d ${config.media.torrentDir} 0755 root media -"
