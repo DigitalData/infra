@@ -28,7 +28,7 @@
     ];
 
     # Create required dirs
-    systemd.tmpfiles.rules = [
+    systemd.tmpfiles.rules = flatten [
       "d ${config.media.dir} 0755 root media -"
       (builtins.map (pf: "d ${config.media.dir}/${pf} 0755 root media -") [ "movies" "tv" "music" ])
       "d ${config.media.torrentDir} 0755 root media -"
