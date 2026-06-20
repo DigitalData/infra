@@ -13,7 +13,6 @@
       }
       
       self.modules.nixos.base
-      self.modules.nixos.arr
       self.nixosModules.octantis
       self.userModules.digitaldata
     ];
@@ -23,8 +22,6 @@
     networking.hostName = "octantis"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-    media.dir = "/data/media";
-    media.torrentDir = "/data/torrents";
 
     # NVIDIA Support
     services.xserver.videoDrivers = [ "nvidia" ];
