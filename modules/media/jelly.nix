@@ -10,7 +10,7 @@
     ];
 
     caddy.exposePorts = {
-      jellyfin = "8096";
+      jellyfin = 8096;
       jellyseerr = config.services.jellyseerr.port;
     };
 
