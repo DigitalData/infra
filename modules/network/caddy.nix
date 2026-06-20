@@ -26,7 +26,7 @@
       enable = true;
       email = config.caddy.email;
       virtualHosts = lib.mapAttrs (key: port: 
-        lib.nameValuePair "${key}.${domain}" {
+        lib.nameValuePair "${key}.${config.caddy.domain}" {
           extraConfig = ''
             reverse_proxy localhost:${port}
           '';
