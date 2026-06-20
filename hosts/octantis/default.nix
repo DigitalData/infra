@@ -26,7 +26,7 @@
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
     # condigure networking
-    caddy.email = "legoxavierlocketravers+caddy@gmail.com"
+    caddy.email = "legoxavierlocketravers+caddy@gmail.com";
 
     # configure media
     media.arr = true;
