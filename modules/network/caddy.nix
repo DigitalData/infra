@@ -14,8 +14,8 @@
       exposePorts = lib.mkOption {
         type = lib.types.attrs;
         default = {};
-        description = "Ports to expose via reverse proxy. So `key: port` becomes `key.domain -> localhost:port`."
-      }
+        description = "Ports to expose via reverse proxy. So `key: port` becomes `key.domain -> localhost:port`.";
+      };
     };
   };
 
