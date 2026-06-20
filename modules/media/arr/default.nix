@@ -9,6 +9,17 @@
       (builtins.map (pf: "d ${config.media.dir.torrents}/${pf} 0775 root ${config.media.users.group} -") [ "movies" "tv" "music" ])
     ];
 
+    caddy.expostPorts = {
+      sonarr = config.services.sonarr.settings.server.port;
+      radarr = config.services.radarr.settings.server.port;
+      prowlarr = config.services.prowlarr.settings.server.port;
+      bazarr = config.services.bazarr.listenPort;
+      readarr = config.services.readarr.settings.server.port;
+      lidarr = config.services.lidarr.settings.server.port;
+      qbittorrent = config.services.qbittorrent.webuiPort;
+      flaresolverr = config.services.flaresolverr.port;
+    };
+
     # TV Shows
     services.sonarr = {
       enable = true;
