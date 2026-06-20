@@ -25,16 +25,14 @@
     services.caddy = {
       enable = true;
       email = config.caddy.email;
-      virtualHosts = lib.map (key: {
+      virtualHosts = lib.mapAttrs' (key: port: {
         name = "${key}.${config.caddy.domain}";
-        value = let 
-            port = builtins.toString config.caddy.exposePorts.${key}; 
-          in {
-            extraConfig = ''
-              reverse_proxy localhost:${port}
-            '';
-          };
-      }) (builtins.attrNames config.caddy.exposePorts);
+        value = {
+          extraConfig = ''
+            reverse_proxy localhost:${builtins.toString port}
+          '';
+        };
+      }) config.caddy.exposePorts;
     };
 
     services.tailscale.permitCertUid = lib.mkIf config.services.tailscale.enable "caddy";
