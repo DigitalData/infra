@@ -31,7 +31,7 @@
             port = config.caddy.exposePorts.${key}; 
           in {
             extraConfig = ''
-              reverse_proxy localhost:${port}
+              reverse_proxy localhost:${builtins.toString port}
             '';
           };
       }) (builtins.attrNames config.caddy.exposePorts);
