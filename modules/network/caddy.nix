@@ -40,8 +40,9 @@
         };
       }) config.caddy.exposePorts;
     };
-    networking.firewall.checkReversePath = "loose";
-    services.resolved.enable = true;
+    networking.hosts = {
+      "127.0.0.1" = lib.map (key: "${key}.${config.caddy.domain}") (lib.attrNames config.caddy.exposePorts);
+    };
     services.tailscale.permitCertUid = lib.mkIf config.services.tailscale.enable "caddy";
 
   };
