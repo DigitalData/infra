@@ -7,7 +7,7 @@
       useRoutingFeatures = "server";
       extraUpFlags = [
         "--accept-dns=false"
-      ]
+      ];
     };
   };
 
