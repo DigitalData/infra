@@ -26,6 +26,11 @@
       enable = true;
       email = config.caddy.email;
       acmeCA = "internal";
+      globalConfig = ''
+        # Explicitly bind to all interfaces for both Tailscale and LAN access
+        http_port 80
+        https_port 443
+      '';
       virtualHosts = lib.mapAttrs' (key: port: {
         name = "${key}.${config.caddy.domain}";
         value = {
