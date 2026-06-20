@@ -14,6 +14,7 @@
       
       self.modules.nixos.base
       self.modules.nixos.tailscale
+      self.modules.nixos.caddy
       self.modules.nixos.media
       self.nixosModules.octantis
       self.userModules.digitaldata
@@ -23,6 +24,9 @@
   flake.nixosModules.octantis = { pkgs, config, lib, ... }: {
     networking.hostName = "octantis"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+    # condigure networking
+    caddy.email = "legoxavierlocketravers+caddy@gmail.com"
 
     # configure media
     media.arr = true;
