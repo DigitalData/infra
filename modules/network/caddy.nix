@@ -30,6 +30,7 @@
         name = "${key}.${config.caddy.domain}";
         value = {
           extraConfig = ''
+            tls internal
             reverse_proxy localhost:${builtins.toString port}
           '';
         };
