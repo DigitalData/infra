@@ -9,7 +9,7 @@
       (builtins.map (pf: "d ${config.media.dir.torrents}/${pf} 0775 root ${config.media.users.group} -") [ "movies" "tv" "music" ])
     ];
 
-    caddy.expostPorts = {
+    caddy.exposePorts = {
       sonarr = config.services.sonarr.settings.server.port;
       radarr = config.services.radarr.settings.server.port;
       prowlarr = config.services.prowlarr.settings.server.port;

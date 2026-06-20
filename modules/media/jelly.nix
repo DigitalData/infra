@@ -9,7 +9,7 @@
       (builtins.map (pf: "d ${config.media.dir.media}/${pf} 0775 root ${config.media.users.group} -") [ "movies" "tv" "music" ])
     ];
 
-    caddy.expostPorts = {
+    caddy.exposePorts = {
       jellyfin = 8096;
       jellyseerr = config.services.jellyseerr.port;
     };
