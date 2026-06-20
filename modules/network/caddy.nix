@@ -25,7 +25,7 @@
     services.caddy = {
       enable = true;
       email = config.caddy.email;
-      acmeCA = "internal";
+      # acmeCA = "internal";
       globalConfig = ''
         # Explicitly bind to all interfaces for both Tailscale and LAN access
         http_port 80
@@ -35,7 +35,6 @@
         name = "${key}.${config.caddy.domain}";
         value = {
           extraConfig = ''
-            tls internal
             reverse_proxy localhost:${builtins.toString port}
           '';
         };
