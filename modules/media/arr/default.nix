@@ -17,7 +17,7 @@
       readarr = config.services.readarr.settings.server.port;
       lidarr = config.services.lidarr.settings.server.port;
       qbittorrent = config.services.qbittorrent.webuiPort;
-      flaresolverr = config.services.flaresolverr.port;
+      # flaresolverr = config.services.flaresolverr.port;
     };
 
     # TV Shows
