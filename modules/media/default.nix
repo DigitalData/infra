@@ -30,7 +30,7 @@
     };
   };
 
-  flake.modules.nixos.media = { config }: {
+  flake.modules.nixos.media = { lib, config }: {
     users.users.${config.media.users.user} = {
       isSystemUser = true;
       group = config.media.users.group;
