@@ -1,4 +1,4 @@
 Setup with
 ```
-tailscale login
+tailscale up --accept-dns=false
 ```
