@@ -27,6 +27,7 @@
       openFirewall = false;
       configDir = "${config.media.dir.data}/jellyseerr";
     };
+    users.groups.${config.media.users.group}.members = [ "jellyseerr" ]
 
   };
 
