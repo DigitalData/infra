@@ -13,6 +13,7 @@
       }
       
       self.modules.nixos.base
+      self.modules.nixos.tailscale
       self.nixosModules.octantis
       self.userModules.digitaldata
     ];
