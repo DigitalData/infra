@@ -25,6 +25,7 @@
     services.caddy = {
       enable = true;
       email = config.caddy.email;
+      acmeCA = "internal";
       virtualHosts = lib.mapAttrs' (key: port: {
         name = "${key}.${config.caddy.domain}";
         value = {
