@@ -13,7 +13,7 @@
       sonarr = config.services.sonarr.settings.server.port;
       radarr = config.services.radarr.settings.server.port;
       prowlarr = config.services.prowlarr.settings.server.port;
-      bazarr = config.services.bazarr.listenPort;
+      # bazarr = config.services.bazarr.listenPort;
       readarr = config.services.readarr.settings.server.port;
       lidarr = config.services.lidarr.settings.server.port;
       qbittorrent = config.services.qbittorrent.webuiPort;
