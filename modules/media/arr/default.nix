@@ -55,7 +55,7 @@
     services.qbittorrent = {
       enable = true;
       openFirewall = false;
-      dataDir = "${config.media.dir.data}/qbittorrent";
+      profileDir = "${config.media.dir.data}/qbittorrent";
       serverConfig = {
         LegalNotice.Accepted = true;
         Preferences = {
