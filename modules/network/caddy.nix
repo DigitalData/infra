@@ -28,10 +28,10 @@
       virtualHosts = lib.map (key: {
         name = "${key}.${config.caddy.domain}";
         value = let 
-            port = config.caddy.exposePorts.${key}; 
+            port = builtins.toString config.caddy.exposePorts.${key}; 
           in {
             extraConfig = ''
-              reverse_proxy localhost:${builtins.toString port}
+              reverse_proxy localhost:${port}
             '';
           };
       }) (builtins.attrNames config.caddy.exposePorts);
