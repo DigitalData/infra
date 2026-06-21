@@ -27,12 +27,12 @@
     hardware = {
       nvidia-container-toolkit.enable = true;
       nvidia = {
+        branch = "legacy_580";
         modesetting.enable = true;
         powerManagement.enable = false;
         powerManagement.finegrained = false;
         open = false;
         nvidiaSettings = true;
-        package = config.boot.kernelPackages.nvidiaPackages.stable;
       };
     };
     nixpkgs.config = {
