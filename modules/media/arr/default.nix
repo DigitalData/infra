@@ -40,6 +40,7 @@
       openFirewall = false;
       dataDir = "${config.media.dir.data}/prowlarr";
     };
+    users.groups.${config.media.users.group}.members = [ "prowlarr" ];
 
     # Subtitles
     services.bazarr = {
