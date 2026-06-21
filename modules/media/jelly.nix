@@ -20,7 +20,7 @@
     services.seerr = {
       enable = true;
       openFirewall = false;
-      configDir = "${config.media.dir.data}/jellyseerr";
+      configDir = "${config.media.dir.data}/seerr";
     };
     users.groups.${config.media.users.group}.members = [ "seerr" ];
 
