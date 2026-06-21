@@ -7,9 +7,13 @@
         type = lib.types.str;
         description = "Email for ACME SSL.";
       };
-      domain = lib.mkOption {
+      domain.internal = lib.mkOption {
         type = lib.types.str;
-        description = "The domain for this host.";
+        description = "The internal domain for this host.";
+      };
+      domain.external = lib.mkOption {
+        type = lib.types.str;
+        description = "The external domain for this host.";
       };
       exposePorts = lib.mkOption {
         type = lib.types.attrs;
@@ -25,20 +29,31 @@
     services.caddy = {
       enable = true;
       email = config.caddy.email;
-      acmeCA = "internal"; # internal CA for my internal routes
+      # acmeCA = "internal"; # internal CA for my internal routes
       globalConfig = ''
         # Explicitly bind to all interfaces for both Tailscale and LAN access
         http_port 80
         https_port 443
       '';
-      virtualHosts = lib.mapAttrs' (key: port: {
-        name = "${key}.${config.caddy.domain}";
-        value = {
-          extraConfig = ''
-            reverse_proxy localhost:${builtins.toString port}
-          '';
+      virtualHosts = let
+        mkVirtualHost = domain: key: port: {
+          name = "${key}.${domain}";
+          value = {
+            extraConfig = if domain == config.caddy.domain.internal then ''
+              tls internal {
+                # Use internal cert, don't manage/sign it
+              }
+              reverse_proxy localhost:${builtins.toString port}
+            '' else ''
+              reverse_proxy localhost:${builtins.toString port}
+            '';
+          };
         };
-      }) config.caddy.exposePorts;
+        mkDomainsForPort = key: port: [
+          (mkVirtualHost config.caddy.domain.internal key port)
+          (mkVirtualHost config.caddy.domain.external key port)
+        ];
+        in lib.listToAttrs (lib.flatten (lib.mapAttrsToList mkDomainsForPort config.caddy.exposePorts));
     };
 
     services.tailscale.permitCertUid = lib.mkIf config.services.tailscale.enable "caddy";
