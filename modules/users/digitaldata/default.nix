@@ -40,7 +40,7 @@
       };
       bash = {
         enable = true;
-        initExtra = ''clear && neofetch'';
+        initExtra = ''clear && fastfetch'';
         shellAliases = {
           "os-config" = ''_BACK_DIR="$(realpath .)" && cd /etc/nixos'';
           "os-back" = ''cd "$_BACK_DIR"'';
