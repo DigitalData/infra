@@ -7,13 +7,9 @@
         type = lib.types.str;
         description = "Email for ACME SSL.";
       };
-      domain.internal = lib.mkOption {
+      domain = lib.mkOption {
         type = lib.types.str;
         description = "The internal domain for this host.";
-      };
-      domain.external = lib.mkOption {
-        type = lib.types.str;
-        description = "The external domain for this host.";
       };
       exposePorts = lib.mkOption {
         type = lib.types.attrs;
@@ -35,25 +31,15 @@
         http_port 80
         https_port 443
       '';
-      virtualHosts = let
-        mkVirtualHost = domain: key: port: {
-          name = "${key}.${domain}";
-          value = {
-            extraConfig = if domain == config.caddy.domain.internal then ''
-              tls internal {
-                # Use internal cert, don't manage/sign it
-              }
-              reverse_proxy localhost:${builtins.toString port}
-            '' else ''
-              reverse_proxy localhost:${builtins.toString port}
-            '';
-          };
+      virtualHosts = lib.mapAttrs' (key: port: {
+        name = "${key}.${config.caddy.domain}";
+        value = {
+          extraConfig = ''
+            tls_internal { }
+            reverse_proxy localhost:${builtins.toString port}
+          '';
         };
-        mkDomainsForPort = key: port: [
-          (mkVirtualHost config.caddy.domain.internal key port)
-          (mkVirtualHost config.caddy.domain.external key port)
-        ];
-        in lib.listToAttrs (lib.flatten (lib.mapAttrsToList mkDomainsForPort config.caddy.exposePorts));
+      }) config.caddy.exposePorts;
     };
 
     services.tailscale.permitCertUid = lib.mkIf config.services.tailscale.enable "caddy";
