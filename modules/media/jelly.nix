@@ -17,13 +17,12 @@
     } // config.media.users;
 
     # Media Request Manager
-    services.jellyseerr = {
+    services.seerr = {
       enable = true;
       openFirewall = false;
-      # TODO: Enable/move once nixpkgs 26 is updated
-      # configDir = "${config.media.dir.data}/jellyseerr";
+      configDir = "${config.media.dir.data}/jellyseerr";
     };
-    users.groups.${config.media.users.group}.members = [ "jellyseerr" ];
+    users.groups.${config.media.users.group}.members = [ "seerr" ];
 
   };
 
