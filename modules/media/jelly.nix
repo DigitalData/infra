@@ -25,7 +25,8 @@
     services.jellyseerr = {
       enable = true;
       openFirewall = false;
-      configDir = "${config.media.dir.data}/jellyseerr";
+      # TODO: Enable/move once nixpkgs 26 is updated
+      # configDir = "${config.media.dir.data}/jellyseerr";
     };
     users.groups.${config.media.users.group}.members = [ "jellyseerr" ];
 
