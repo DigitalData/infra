@@ -20,7 +20,7 @@
       username = "digitaldata";
       homeDirectory = "/home/digitaldata";
       packages = with pkgs; [
-        neofetch # Terminal HUD
+        fastfetch # Terminal HUD
       ];
       stateVersion = "25.11";
     };
