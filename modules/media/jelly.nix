@@ -12,7 +12,7 @@
     services.jellyfin = {
       enable = true;
       openFirewall = false;
-      # dataDir = "${config.media.dir.data}/jellyfin";
+      dataDir = "${config.media.dir.data}/jellyfin";
     } // config.media.users;
 
     # Media Request Manager
