@@ -25,7 +25,7 @@
     services.caddy = {
       enable = true;
       email = config.caddy.email;
-      # acmeCA = "internal";
+      acmeCA = "internal"; # internal CA for my internal routes
       globalConfig = ''
         # Explicitly bind to all interfaces for both Tailscale and LAN access
         http_port 80
