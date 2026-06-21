@@ -3,12 +3,6 @@
  
   flake.modules.nixos.media = { lib, config, pkgs, ... }: lib.mkIf config.media.jelly {
     
-    # Create required dirs
-    systemd.tmpfiles.rules = lib.flatten [
-      "d ${config.media.dir.media} 0775 root ${config.media.users.group} -"
-      (builtins.map (pf: "d ${config.media.dir.media}/${pf} 0775 root ${config.media.users.group} -") [ "movies" "tv" "music" ])
-    ];
-
     caddy.exposePorts = {
       jellyfin = 8096;
       jellyseerr = config.services.jellyseerr.port;
