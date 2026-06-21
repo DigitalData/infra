@@ -6,7 +6,7 @@
     # Create required dirs
     systemd.tmpfiles.rules = lib.flatten [
       "d ${config.media.dir.torrents} 0775 root ${config.media.users.group} -"
-      (builtins.map (pf: "d ${config.media.dir.torrents}/${pf} 0775 root ${config.media.users.group} -") [ "movies" "tv" "music" ])
+      (builtins.map (pf: "d ${config.media.dir.torrents}/${pf} 0775 root ${config.media.users.group} -") [ "movies" "tv" "music" "books"])
     ];
 
     caddy.exposePorts = {
