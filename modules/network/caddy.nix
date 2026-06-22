@@ -29,7 +29,7 @@
     services.caddy = {
       enable = true;
       email = config.caddy.email;
-      
+
       globalConfig = ''
         http_port 80
         https_port 443
@@ -48,10 +48,9 @@
         # //
         # Internal routes (Internal TLS)
         (lib.mapAttrs' (key: port: {
-          name = "${key}.${config.caddy.domain.private}";
+          name = "http://${key}.${config.caddy.domain.private}";
           value = {
             extraConfig = ''
-              tls internal { }
               reverse_proxy localhost:${builtins.toString port}
             '';
           };
