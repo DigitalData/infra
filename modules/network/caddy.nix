@@ -38,7 +38,7 @@
       virtualHosts = 
         # External routes (Let's Encrypt)
         (lib.mapAttrs' (key: port: {
-          name = "${key}.${config.caddy.domain.public}";
+          name = "https://${key}.${config.caddy.domain.public}";
           value = {
             extraConfig = ''
               reverse_proxy localhost:${builtins.toString port}
@@ -48,7 +48,7 @@
         
         # Internal routes (Internal TLS)
         // (lib.mapAttrs' (key: port: {
-          name = "${key}.${config.caddy.domain.private}";
+          name = "http://${key}.${config.caddy.domain.private}";
           value = {
             extraConfig = ''
               tls {
