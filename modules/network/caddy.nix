@@ -28,13 +28,7 @@
     # Caddy is a reverse proxy / HTTPS management service thing
     services.caddy = {
       enable = true;
-      email = config.caddy.email;
-
-      globalConfig = ''
-        http_port 80
-        https_port 443
-      '';
-      
+      email = config.caddy.email;      
       virtualHosts = 
         # # External routes (Let's Encrypt)
         # (lib.mapAttrs' (key: port: {
