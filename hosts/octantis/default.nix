@@ -55,12 +55,12 @@
       nvidia.acceptLicense = true;
       cudaSupport = true;
     };
-    
+
     services.jellyfin.hardwareAcceleration = {
       enable = true;
       type = "nvenc";
-      device = /dev/dri/renderD128 
-    }
+      device = "/dev/dri/renderD128";
+    };
 
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";
