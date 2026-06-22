@@ -7,9 +7,13 @@
         type = lib.types.str;
         description = "Email for ACME SSL.";
       };
-      domain = lib.mkOption {
+      domain.private = lib.mkOption {
         type = lib.types.str;
         description = "The internal domain for this host.";
+      };
+      domain.public = lib.mkOption {
+        type = lib.types.str;
+        description = "The external domain for this host.";
       };
       exposePorts = lib.mkOption {
         type = lib.types.attrs;
@@ -25,21 +29,34 @@
     services.caddy = {
       enable = true;
       email = config.caddy.email;
-      # acmeCA = "internal"; # internal CA for my internal routes
+      
       globalConfig = ''
-        # Explicitly bind to all interfaces for both Tailscale and LAN access
         http_port 80
         https_port 443
       '';
-      virtualHosts = lib.mapAttrs' (key: port: {
-        name = "${key}.${config.caddy.domain}";
-        value = {
-          extraConfig = ''
-            tls_internal { }
-            reverse_proxy localhost:${builtins.toString port}
-          '';
-        };
-      }) config.caddy.exposePorts;
+      
+      virtualHosts = 
+        # External routes (Let's Encrypt)
+        (lib.mapAttrs' (key: port: {
+          name = "${key}.${config.caddy.domain.public}";
+          value = {
+            extraConfig = ''
+              reverse_proxy localhost:${builtins.toString port}
+            '';
+          };
+        }) config.caddy.exposePorts)
+        
+        # Internal routes (Internal TLS)
+        // (lib.mapAttrs' (key: port: {
+          name = "${key}.${config.caddy.domain.private}";
+          value = {
+            extraConfig = ''
+              tls internal
+              reverse_proxy localhost:${builtins.toString port}
+            '';
+          };
+        }) config.caddy.exposePorts);
+      
     };
 
     services.tailscale.permitCertUid = lib.mkIf config.services.tailscale.enable "caddy";

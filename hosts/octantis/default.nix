@@ -27,7 +27,8 @@
 
     # condigure networking
     caddy.email = "legoxavierlocketravers+caddy@gmail.com";
-    caddy.domain = "octantis.local";
+    caddy.domain.private = "octantis.local";
+    caddy.domain.public = "octantis.peccary-darter.ts.net"
 
     # configure media
     media.arr = true;
