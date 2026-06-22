@@ -59,7 +59,7 @@
       
     };
 
-    # services.tailscale.permitCertUid = lib.mkIf config.services.tailscale.enable "caddy";
+    services.tailscale.permitCertUid = lib.mkIf config.services.tailscale.enable "caddy";
   };
 
 }
