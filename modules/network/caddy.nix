@@ -51,7 +51,9 @@
           name = "${key}.${config.caddy.domain.private}";
           value = {
             extraConfig = ''
-              get_certificate tailscale
+              tls {
+                get_certificate tailscale
+              }
               reverse_proxy localhost:${builtins.toString port}
             '';
           };
