@@ -36,24 +36,21 @@
       '';
       
       virtualHosts = 
-        # External routes (Let's Encrypt)
-        (lib.mapAttrs' (key: port: {
-          name = "https://${key}.${config.caddy.domain.public}";
-          value = {
-            extraConfig = ''
-              reverse_proxy localhost:${builtins.toString port}
-            '';
-          };
-        }) config.caddy.exposePorts)
-        
+        # # External routes (Let's Encrypt)
+        # (lib.mapAttrs' (key: port: {
+        #   name = "https://${key}.${config.caddy.domain.public}";
+        #   value = {
+        #     extraConfig = ''
+        #       reverse_proxy localhost:${builtins.toString port}
+        #     '';
+        #   };
+        # }) config.caddy.exposePorts)
+        # //
         # Internal routes (Internal TLS)
-        // (lib.mapAttrs' (key: port: {
+        (lib.mapAttrs' (key: port: {
           name = "http://${key}.${config.caddy.domain.private}";
           value = {
             extraConfig = ''
-              tls {
-                get_certificate tailscale
-              }
               reverse_proxy localhost:${builtins.toString port}
             '';
           };
