@@ -42,7 +42,7 @@
         # //
         # Internal routes (Internal TLS)
         (lib.mapAttrs' (key: port: {
-          name = "http://${key}.${config.caddy.domain.private}";
+          name = "${key}.${config.caddy.domain.private}";
           value = {
             extraConfig = ''
               reverse_proxy localhost:${builtins.toString port}
