@@ -12,6 +12,7 @@
     services.jellyfin = {
       enable = true;
       openFirewall = false;
+      hardwareAcceleration.enable = true;
       dataDir = "${config.media.dir.data}/jellyfin";
       cacheDir = "${config.media.dir.data}/cache/jellyfin";
     } // config.media.users;
