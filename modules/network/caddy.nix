@@ -52,6 +52,8 @@
       
     };
 
+    services.resolved.enable = true;
+
     services.tailscale.permitCertUid = lib.mkIf config.services.tailscale.enable "caddy";
   };
 
