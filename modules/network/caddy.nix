@@ -46,7 +46,7 @@
         }) config.caddy.exposePorts)
         //
         lib.optionalAttrs (config.caddy.private.enable) (lib.mapAttrs' (key: port: {
-          name = "http://${key}.${config.caddy.private.domain}";
+          name = "${key}.${config.caddy.private.domain}";
           value = {
             extraConfig = ''
               reverse_proxy localhost:${builtins.toString port}
