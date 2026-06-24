@@ -29,8 +29,8 @@
     caddy.email = "legoxavierlocketravers+caddy@gmail.com";
     caddy.private = {
       enable = true;
-      domain = "octantis.local"
-    }
+      domain = "octantis.local";
+    };
     # caddy.public = {
     #   enable = true;
     #   domain = # TODO: This
