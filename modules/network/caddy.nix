@@ -53,9 +53,9 @@
             '';
           };
         }) config.caddy.exposePorts);
-      
     };
 
+    networking.firewall.allowedTCPPorts = [ 80 443 ];
     services.tailscale.permitCertUid = lib.mkIf config.services.tailscale.enable "caddy";
   };
 
