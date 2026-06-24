@@ -7,13 +7,19 @@
         type = lib.types.str;
         description = "Email for ACME SSL.";
       };
-      domain.private = lib.mkOption {
-        type = lib.types.str;
-        description = "The internal domain for this host.";
+      private = {
+        enable = lib.mkEnableOption "Serve on private domain?";
+        domain = lib.mkOption {
+          type = lib.types.str;
+          description = "The internal domain for this host.";
+        };
       };
-      domain.public = lib.mkOption {
-        type = lib.types.str;
-        description = "The external domain for this host.";
+      public = {
+        enable = lib.mkEnableOption "Serve on public domain?";
+        domain = lib.mkOption {
+          type = lib.types.str;
+          description = "The external domain for this host.";
+        };
       };
       exposePorts = lib.mkOption {
         type = lib.types.attrs;
@@ -29,20 +35,18 @@
     services.caddy = {
       enable = true;
       email = config.caddy.email;      
-      virtualHosts = 
-        # # External routes (Let's Encrypt)
-        # (lib.mapAttrs' (key: port: {
-        #   name = "https://${key}.${config.caddy.domain.public}";
-        #   value = {
-        #     extraConfig = ''
-        #       reverse_proxy localhost:${builtins.toString port}
-        #     '';
-        #   };
-        # }) config.caddy.exposePorts)
-        # //
-        # Internal routes (Internal TLS)
-        (lib.mapAttrs' (key: port: {
-          name = "${key}.${config.caddy.domain.private}";
+      virtualHosts =
+        lib.optionalAttrs (config.caddy.public.enable) (lib.mapAttrs' (key: port: {
+          name = "https://${key}.${config.caddy.public.domain}";
+          value = {
+            extraConfig = ''
+              reverse_proxy localhost:${builtins.toString port}
+            '';
+          };
+        }) config.caddy.exposePorts)
+        //
+        lib.optionalAttrs (config.caddy.private.enable) (lib.mapAttrs' (key: port: {
+          name = "http://${key}.${config.caddy.private.domain}";
           value = {
             extraConfig = ''
               reverse_proxy localhost:${builtins.toString port}
