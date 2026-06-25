@@ -11,7 +11,7 @@
     # Media server
     services.jellyfin = {
       enable = true;
-      openFirewall = false;
+      openFirewall = true;
       dataDir = "${config.media.dir.data}/jellyfin";
       cacheDir = "${config.media.dir.data}/cache/jellyfin";
     } // config.media.users;
@@ -19,7 +19,7 @@
     # Media Request Manager
     services.seerr = {
       enable = true;
-      openFirewall = false;
+      openFirewall = true;
     };
     users.groups.${config.media.users.group}.members = [ "seerr" ];
 
