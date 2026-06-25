@@ -50,6 +50,7 @@
           value = {
             extraConfig = ''
               reverse_proxy localhost:${builtins.toString port}
+              tls internal
             '';
           };
         }) config.caddy.exposePorts);
