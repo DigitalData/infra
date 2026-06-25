@@ -40,7 +40,7 @@
           name = "https://${key}.${config.caddy.public.domain}";
           value = {
             extraConfig = ''
-              reverse_proxy localhost:${builtins.toString port}
+              reverse_proxy 127.0.0.1:${builtins.toString port}
             '';
           };
         }) config.caddy.exposePorts)
@@ -49,8 +49,7 @@
           name = "${key}.${config.caddy.private.domain}";
           value = {
             extraConfig = ''
-              reverse_proxy localhost:${builtins.toString port}
-              tls internal
+              reverse_proxy 127.0.0.1:${builtins.toString port}
             '';
           };
         }) config.caddy.exposePorts);
