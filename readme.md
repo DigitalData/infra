@@ -11,6 +11,8 @@ Hopefully using Nix and NixOS will allow me to trust my dev environment more.
   - [x] Arr (Jellyfin, ...)
   - [ ] Encrypted secrets hydration (Agenix / SOPS)
   - [ ] Immich + Nextcloud
+  - [ ] Caddy to NameCheap (need SOPS/Agenix for encrypted API key)
+  - [ ] Usenet?
   - [ ] Minecraft Servers (Modded, Vanilla)
   - [ ] Home Security (Cameras, Sensors, ...)
   - [ ] Home Assistant
