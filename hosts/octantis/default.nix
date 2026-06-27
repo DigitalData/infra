@@ -13,6 +13,9 @@
       }
       
       self.modules.nixos.base
+      self.modules.nixos.tailscale
+      self.modules.nixos.caddy
+      self.modules.nixos.media
       self.nixosModules.octantis
       self.userModules.digitaldata
     ];
@@ -21,6 +24,24 @@
   flake.nixosModules.octantis = { pkgs, config, lib, ... }: {
     networking.hostName = "octantis"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+    # condigure networking
+    caddy.email = "legoxavierlocketravers+caddy@gmail.com";
+    caddy.private = {
+      enable = true;
+      domain = "octantis.local";
+    };
+    # caddy.public = {
+    #   enable = true;
+    #   domain = # TODO: This
+    # }
+
+    # configure media
+    media.arr = true;
+    media.jelly = true;
+    media.dir.data = "/data/media/data";
+    media.dir.media = "/data/media/media";
+    media.dir.torrents = "/data/media/torrents";
 
     # NVIDIA Support
     services.xserver.videoDrivers = [ "nvidia" ];
@@ -35,9 +56,16 @@
         nvidiaSettings = true;
       };
     };
+
     nixpkgs.config = {
       nvidia.acceptLicense = true;
       cudaSupport = true;
+    };
+
+    services.jellyfin.hardwareAcceleration = {
+      enable = true;
+      type = "nvenc";
+      device = "/dev/dri/renderD128";
     };
 
     # Configure network proxy if necessary

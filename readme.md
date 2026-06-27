@@ -6,10 +6,15 @@ My personal dev environments are a mess. I have previously tried to organize a `
 Hopefully using Nix and NixOS will allow me to trust my dev environment more.
 
 ## Goals
-- [ ] Modularize reusable components.
+- [x] Modularize reusable components.
 - [ ] Octantis
-  - [ ] Arr (Jellyfin, ...)
+  - [x] Arr (Jellyfin, ...)
+  - [ ] Encrypted secrets (Agenix / SOPS)
   - [ ] Immich + Nextcloud
+  - [ ] Caddy to NameCheap (need SOPS/Agenix for encrypted API key)
+  - [ ] Arr 2
+    - [ ] Marlinsearch (?)
+    - [ ] Usenet (?)
   - [ ] Minecraft Servers (Modded, Vanilla)
   - [ ] Home Security (Cameras, Sensors, ...)
   - [ ] Home Assistant
