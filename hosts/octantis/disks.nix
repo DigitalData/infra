@@ -60,7 +60,7 @@
           };
         };
         
-        media = {
+        content = {
           type = "disk";
           device = "/dev/disk/by-id/ata-ST8000DM004-2U9188_ZR16KJA3";
           destroy = true;
@@ -72,7 +72,7 @@
                 content = {
                   type = "filesystem";
                   format = "btrfs";
-                  mountpoint = "/media";
+                  mountpoint = "/content";
                 };
               };
             };
