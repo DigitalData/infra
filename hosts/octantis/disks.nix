@@ -5,6 +5,7 @@
         main = {
           type = "disk";
           device = "/dev/disk/by-id/ata-Corsair_Neutron_GTX_SSD_130479140000971401BB";
+          destroy = false;
           content = {
             type = "gpt";
             partitions = {
@@ -43,6 +44,7 @@
         data1 = {
           type = "disk";
           device = "/dev/disk/by-id/ata-ST2000DM001-1CH164_Z1E3253L";
+          destroy = false;
           content = {
             type = "gpt";
             partitions = {
@@ -61,6 +63,7 @@
         media = {
           type = "disk";
           device = "/dev/disk/by-id/ata-ST8000DM004-2U9188_ZR16KJA3";
+          destroy = true;
           content = {
             type = "gpt";
             partitions = {
