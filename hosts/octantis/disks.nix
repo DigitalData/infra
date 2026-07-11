@@ -57,6 +57,24 @@
             };
           };
         };
+        
+        media = {
+          type = "disk";
+          device = "/dev/disk/by-id/ata-ST8000DM004-2U9188_ZR16KJA3";
+          content = {
+            type = "gpt";
+            partitions = {
+              data = {
+                size = "100%";
+                content = {
+                  type = "filesystem";
+                  format = "btrfs";
+                  mountpoint = "/media";
+                };
+              };
+            };
+          };
+        };
       };
     };
   };
