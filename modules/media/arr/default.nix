@@ -55,6 +55,7 @@
     services.readarr = {
       enable = true;
       openFirewall = false;
+      dataDir = "${config.media.dir.data}/readarr";
     } // config.media.users;
 
     # Music
