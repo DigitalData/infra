@@ -40,8 +40,8 @@
     media.arr = true;
     media.jelly = true;
     media.dir.data = "/data/media/data";
-    media.dir.media = "/data/media/media";
-    media.dir.torrents = "/data/media/torrents";
+    media.dir.media = "/content/media";
+    media.dir.torrents = "/content/torrents";
 
     # NVIDIA Support
     services.xserver.videoDrivers = [ "nvidia" ];
