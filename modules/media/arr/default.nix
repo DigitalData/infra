@@ -72,6 +72,16 @@
       profileDir = "${config.media.dir.data}/qbittorrent";
       serverConfig = {
         LegalNotice.Accepted = true;
+        BitTorrent = {
+          Session = {
+            AddTorrentStopped = false;
+            DefaultSavePath =  "/content/torrents";
+            DisableAutoTMMByDefault = false;
+            MaxActiveDownloads = 5;
+            MaxActiveTorrents = 8;
+            MaxActiveUploads = 2;
+          };
+        };
         Preferences = {
           Downloads = {
             SavePath = "${config.media.dir.torrents}";
