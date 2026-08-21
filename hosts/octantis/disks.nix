@@ -63,7 +63,7 @@
         content = {
           type = "disk";
           device = "/dev/disk/by-id/ata-ST8000DM004-2U9188_ZR16KJA3";
-          destroy = true;
+          destroy = false;
           content = {
             type = "gpt";
             partitions = {
