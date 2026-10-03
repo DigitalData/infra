@@ -33,7 +33,6 @@
       inputs.flake-parts.flakeModules.modules
       inputs.disko.flakeModules.disko
       inputs.home-manager.flakeModules.home-manager
-      inputs.minecraft-create-x-style-server.flakeModules.minecraft-create-x-style-server
       (inputs.import-tree [./modules ./hosts])
     ];
 
