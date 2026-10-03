@@ -24,7 +24,7 @@
     };
 
     # Create X-style modded server
-    inputs.minecraft-create-x-style-server.url = "github:DigitalData/create-x-style/forge-1.20.1-server";
+    minecraft-create-x-style-server.url = "github:DigitalData/create-x-style/forge-1.20.1-server";
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } 
