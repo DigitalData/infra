@@ -11,6 +11,8 @@
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
       }
+
+      inputs.minecraft-create-x-style-server.nixosModules.minecraft-create-x-style-server
       
       self.modules.nixos.base
       self.modules.nixos.tailscale
@@ -77,6 +79,14 @@
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
+
+    # Minecraft server configurations
+    services.minecraft-create-x-style-server = {
+      enable = true;
+      autostart = true;
+      dataDir = "/data/minecraft/create-x-style";
+      memory = { max = "6G"; min = "2G"; };
+    };
 
     # List packages installed in system profile. To search, run:
     # $ nix search wget
