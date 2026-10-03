@@ -22,6 +22,9 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Create X-style modded server
+    inputs.minecraft-create-x-style-server.url = "github:DigitalData/create-x-style/forge-1.20.1-server";
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } 
