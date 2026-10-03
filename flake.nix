@@ -25,7 +25,7 @@
 
     # Create X-style modded server
     minecraft-create-x-style-server = {
-      url = "git+ssh://git@github.com:DigitalData/create-x-style.git?ref=forge-1.20.1-server";
+      url = "git+ssh://git@github.com:DigitalData/create-x-style.git/forge-1.20.1-server";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
