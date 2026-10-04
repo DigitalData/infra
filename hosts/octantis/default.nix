@@ -83,7 +83,6 @@
     # Minecraft server configurations
     services.minecraft-create-x-style-server = {
       enable = true;
-      autostart = true;
       dataDir = "/data/minecraft/create-x-style";
       memory = { max = "6G"; min = "2G"; };
     };
