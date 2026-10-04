@@ -84,7 +84,6 @@
     services.minecraft-create-x-style-server = {
       enable = true;
       dataDir = "/data/minecraft/create-x-style";
-      memory = { max = "6G"; min = "2G"; };
     };
 
     # List packages installed in system profile. To search, run:
