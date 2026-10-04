@@ -12,7 +12,7 @@
         home-manager.useUserPackages = true;
       }
 
-      inputs.minecraft-create-x-style-server.nixosModules.default
+      inputs.minecraft-create-x-style-server.nixosModules.minecraft-create-x-style-server
       
       self.modules.nixos.base
       self.modules.nixos.tailscale
