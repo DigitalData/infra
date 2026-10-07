@@ -12,7 +12,7 @@
         home-manager.useUserPackages = true;
       }
 
-      inputs.minecraft-create-x-style-server.nixosModules.minecraft-create-x-style-server
+      inputs.minecraft_create_x_style.nixosModules.minecraft_create_x_style
       
       self.modules.nixos.base
       self.modules.nixos.tailscale
@@ -81,9 +81,10 @@
     nixpkgs.config.allowUnfree = true;
 
     # Minecraft server configurations
-    services.minecraft-create-x-style-server = {
+    services.minecraft_create_x_style = {
       enable = true;
       dataDir = "/data/minecraft/create-x-style";
+      openFirewall = true;
     };
 
     # List packages installed in system profile. To search, run:
